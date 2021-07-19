@@ -24,6 +24,34 @@ public class FunctionsforProgramme {
         }
         return 0;
     }
-    //public int deleteroom(Room room){}
+    public int deleteroom(Room room){
+        try {
+            int var = Db.use().execute("delete from room where roomid=?",room.getRoomid());
+                    return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+    }
+    public int updateroomname(Room room,String name){
+        try {
+            int var=Db.use().execute("update room set roomname=? where roomid=?",name,room.getRoomid());
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+
+    }
+    public int updateownerid(Room room,String ownerid){
+        try {
+            int var=Db.use().execute("update room set ownerid=? where roomid=?",Integer.parseInt(ownerid),room.getRoomid());
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+
+    }
 }
 
