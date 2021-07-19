@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<title>登陆管理系统</title>
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+		<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	</head>
+
+	<body class="bg-gradient-primary">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-9 col-lg-12 col-xl-10">
+					<div class="card shadow-lg o-hidden border-0 my-5">
+						<div class="card-body p-0">
+							<div class="row">
+								<div class="col-lg-6 offset-xl-3">
+									<div class="p-5" id="app">
+										<span style="color: #224abe;font-size: 43px;vertical-align: middle;">物业信息管理系统</span>
+										<div class="text-center"></div>
+										<form class="user">
+
+											      <div class="form-group"><input type="text"
+													class="form-control form-control-user" id="exampleInputEmail"
+													placeholder="用户名" name="username" v-model="username" /></div>
+
+											        <div class="form-group"><input type="password"
+													class="form-control form-control-user" id="exampleInputPassword"
+													placeholder="密码" name="password" v-model="passward" /></div>
+
+											<button class="btn btn-primary btn-block text-white btn-user" type="submit"
+												@click="login()">登陆系统</button>
+
+											<hr />
+											<a @click="jumpfgpass()" style="cursor:pointer;float:right">忘记密码</a>
+										</form>
+										<div class="text-center"></div>
+										<div class="text-center"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<script src="assets/js/theme.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/axios.js"></script>
+		<script>
+			var vue = new Vue({
+				el: "#app",
+				router: new VueRouter(),
+				data: {
+					//iserrorshow: false,
+					iscorrect: false,
+					username: "",
+					passward: "",
+				},
+				methods: {
+					jumpfgpass: function() {
+						self.location = "forgot-password.html"
+					},
+					jumpin: function() {
+						self.location = "table.html"
+					},
+					login: function() {
+						if (!(this.username == "root" && this.passward == "root")) {
+							alert("密码错误")
+							return false;
+						} else {
+							this.jumpin();
+						}
+					}
+				}
+
+			});
+		</script>
+	</body>
+</html>
