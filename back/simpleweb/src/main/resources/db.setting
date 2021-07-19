@@ -1,6 +1,6 @@
 url = jdbc:mysql://127.0.0.1:3306/hms?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
 user = root
-pass = root
+pass = 123456
 driver = com.mysql.cj.jdbc.Driver
 
 ## 可选配置
