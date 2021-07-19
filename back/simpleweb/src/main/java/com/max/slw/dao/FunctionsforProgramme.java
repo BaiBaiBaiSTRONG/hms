@@ -10,7 +10,7 @@ public class FunctionsforProgramme {
 
     public List<Entity> roomquery(int a) throws SQLException {
         List<Entity> list = null;
-        list = Db.use().query("select roomid,roomname,bulidingid,ownerid,area,tenement,status from owner natural join room natural join expense natural join building natural join parking natural join request where building id =?","");
+        list = Db.use().query("select roomid,roomname,buildingid,ownerid,area,tenement,status from room natural join building where buildingid =?",a);
         return list;
     }
     public int insertroom(Room room)

@@ -19,6 +19,7 @@ public class roomqueryapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String id = req.getParameter("id");
+        System.out.println(id);
         List<Entity> list = null;
         FunctionsforProgramme way=new FunctionsforProgramme();
         try {
@@ -27,6 +28,7 @@ public class roomqueryapi extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println(list);
         String json = JSONUtil.toJsonStr(list);
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter pw = resp.getWriter();
