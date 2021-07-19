@@ -54,10 +54,11 @@ public class FunctionsforProgramme {
         }
 
     }
-    public int roomupdate(Room room,String updatetype,String updatecontent)
+    public int Fullupdate(String pointer,String tabletype,String updatetype,String updatecontent)
     {
+        String tabletypeid=tabletype+"id";
         try {
-            int var=Db.use().execute("update room set "+updatetype+"=? where roomid=?",updatecontent,room.getRoomid());
+            int var=Db.use().execute("update "+tabletype+" set "+updatetype+"=? where "+tabletypeid+"=?",updatecontent,pointer);
             return var;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
