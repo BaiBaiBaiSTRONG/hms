@@ -1,13 +1,17 @@
 com/max/slw/dao/Person.java
  com.max.slw.dao.Person
+com/max/slw/api/Roomnameupdateapi.java
+ com.max.slw.api.Roomnameupdateapi
 com/max/slw/dao/Room.java
  com.max.slw.dao.Room
 com/max/slw/api/UserQuaryApi.java
  com.max.slw.api.UserQuaryApi
-com/max/slw/api/roomqueryapi.java
- com.max.slw.api.roomqueryapi
+com/max/slw/api/UserDeleteApi.java
+ com.max.slw.api.UserDeleteApi
 com/max/slw/api/RoominsetApi.java
  com.max.slw.api.RoominsetApi
+com/max/slw/api/Owneridupdateapi.java
+ com.max.slw.api.Owneridupdateapi
 com/max/slw/common/GlobaFilter.java
  com.max.slw.common.GlobaFilter
 com/max/slw/api/DemoSlt.java
@@ -30,5 +34,7 @@ com/max/slw/dao/FunctionsforProgramme.java
  com.max.slw.dao.FunctionsforProgramme
 com/max/slw/dao/DemoDao.java
  com.max.slw.dao.DemoDao
-com/max/slw/api/UserDeleteApi.java
- com.max.slw.api.UserDeleteApi
+com/max/slw/api/Roomdeleteapi.java
+ com.max.slw.api.Roomdeleteapi
+com/max/slw/api/roomqueryapi.java
+ com.max.slw.api.roomqueryapi

@@ -22,7 +22,7 @@ public class Owneridupdateapi extends HttpServlet {
         System.out.println(ownerid);
         System.out.println(roomid);
         FunctionsforProgramme way = new FunctionsforProgramme();
-        Room room=new Room();
+        Room room= new Room();
         room.setRoomid(Integer.parseInt(roomid));
         int result = way.updateroomname(room,ownerid);
         boolean blres = (result != 0);

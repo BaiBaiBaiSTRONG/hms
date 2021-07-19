@@ -10,7 +10,7 @@ public class Room {
     public int area;
     public String tenement;
     public String status;
-
+    public Room(){}
     public Room(int roomid, String roomname, int buildingid, int ownerid, int area, String tenement, String status) {
         this.roomid = roomid;
         this.roomname = roomname;

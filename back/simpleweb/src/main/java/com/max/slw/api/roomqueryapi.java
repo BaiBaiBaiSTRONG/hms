@@ -18,7 +18,7 @@ import java.util.List;
 public class roomqueryapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        String id = req.getParameter("id");
+        String id = req.getParameter("buildingid");
         System.out.println(id);
         List<Entity> list = null;
         FunctionsforProgramme way=new FunctionsforProgramme();

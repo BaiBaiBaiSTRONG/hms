@@ -159,13 +159,13 @@
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="产权人" v-model="ownerid">
+													aria-controls="dataTable" placeholder="产权人" v-model="ownername">
 											</label>
 										</div>
 									</div>
 									<div class="col-md-2 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="testlog()">查询</button>
+											@click="roomquery()">查询</button>
 									</div>
 
 
@@ -179,18 +179,37 @@
 									<table class="table my-0" id="dataTable">
 										<thead>
 											<tr>
-												<th>Name</th>
-												<th>Position</th>
-												<th>Office</th>
-												<th>Age</th>
-												<th>Start date</th>
-												<th>Salary</th>
-												
+												<th><strong>序号</strong></th>
+												<th><strong>房间号</strong></th>
+												<th><strong>房间名</strong></th>
+												<th><strong>楼宇号</strong></th>
+												<th><strong>产权人号</strong></th>
+												<th><strong>面积</strong></th>
+												<th><strong>住户</strong></th>
+												<th><strong>状态</strong></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr></tr>
-											<tr>
+											<tr v-for="(item, index) in list">
+												<td>{{index + 1 }}</td>
+												<td>{{item.roomid}}</td>
+												<td>{{item.roomname}}</td>
+												<td>{{item.buildingid}}</td>
+												<td>{{item.ownerid}}</td>
+												<td>{{item.area}}</td>
+												<td>{{item.tenement}}</td>
+												<td>{{item.status}}</td>
+												<td>
+													<button class="btn btn-primary btn-block text-white btn-user"
+														type="submit" @click="roomupdate()">更新</button>
+												</td>
+												<td>
+													<button class="btn btn-primary btn-block text-white btn-user"
+														type="submit" @click="roomdelete(item.roomid)">删除</button>
+												</td>
+											</tr>
+											<!-- <tr>
 												<td>张三</td>
 												<td>Chief Executive Officer(CEO)</td>
 												<td>London</td>
@@ -205,19 +224,21 @@
 													<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 													@click="userdelete()">删除</button>
 												</td>
-											</tr>
+											</tr> -->
 											<tr></tr>
-											
+
 
 										</tbody>
 										<tfoot>
 											<tr>
-												<td><strong>Name</strong></td>
-												<td><strong>Position</strong></td>
-												<td><strong>Office</strong></td>
-												<td><strong>Age</strong></td>
-												<td><strong>Start date</strong></td>
-												<td><strong>Salary</strong></td>
+												<th><strong>序号</strong></th>
+												<th><strong>房间号</strong></th>
+												<th><strong>房间名</strong></th>
+												<th><strong>楼宇号</strong></th>
+												<th><strong>产权人号</strong></th>
+												<th><strong>面积</strong></th>
+												<th><strong>住户</strong></th>
+												<th><strong>状态</strong></th>
 											</tr>
 										</tfoot>
 									</table>
@@ -228,8 +249,8 @@
 										</p>
 									</div>
 									<div class="col-md-6">
-										<nav
-											class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+										<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+											
 											<!-- <ul class="pagination">
 												<li class="page-item disabled"><a class="page-link" href="#"
 														aria-label="Previous"><span aria-hidden="true">«</span></a></li>
@@ -268,17 +289,44 @@
 					iscorrect: false,
 					buildingid: "",
 					ownerid: "",
+					ownername: "",
+					list: [],
 				},
-				methods:{
+				methods: {
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					userupdate:function(){
-						
+					roomupdate: function() {
+
 					},
-					userdelete:function(){
-						
-					}
+					roomdelete: function(roomid) {
+						console.log(roomid);
+					},
+					roomquery: function() {
+						console.log(this.buildingid);
+						let param = new URLSearchParams();
+						param.append('buildingid', this.buildingid);
+						axios({
+							headers: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							method: "post",
+							url: "http://localhost:8888/simpleweb/userqueryapi",
+							data: param
+						}).then((res) => {
+							console.log(res.data);
+							if (res.data.length > 0) {
+								this.list = res.data;
+								this.isshow = false;
+							} else {
+								this.list = [];
+								this.isshow = true;
+							}
+
+						}).catch((error) => {
+							console.log(error);
+						});
+					},
 				}
 			});
 		</script>
