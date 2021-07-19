@@ -116,158 +116,14 @@
 									onClick="location.href='404.html'">
 							</div>
 							<div class="card-body" id="app">
+								<!-- 从此处开始执行任务区内容 -->
+								
 								<div class="row">
-									<!-- 
-										<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-											<label>Show&nbsp;<select
-													class="form-control form-control-sm custom-select custom-select-sm">
-													<option value="10" selected="">10</option>
-													<option value="25">25</option>
-													<option value="50">50</option>
-													<option value="100">100</option>
-												</select>&nbsp;</label>
-										</div> 
-									</div> -->
-									<!-- 每页显示数量部分 暂不实现-->
-									<!-- <div class="col-md-6">
-										<div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input
-													type="search" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="Search"></label></div>
-									 -->
-									<!-- 简易搜索 暂不实现 -->
-									<div class="col-md-3 text-nowrap">
-										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-											<label style="font-size: 15px;">小区:&nbsp;<select
-													class="form-control form-control-sm custom-select custom-select-sm">
-													<option value="mo" selected="">大连理工大学开发区校区</option>
-													<option value="25">25</option>
-
-												</select>&nbsp;</label>
-										</div>
-									</div>
-									<div class="col-md-2 text-nowrap">
-										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-											<label style="font-size: 15px;">楼宇:&nbsp;<select
-													class="form-control form-control-sm custom-select custom-select-sm"
-													v-model="buildingid">
-													<option value="1" selected="A">A</option>
-													<option value="2">B</option>
-												</select>&nbsp;</label>
-										</div>
-									</div>
-									<div class="col-md-2 text-nowrap">
-										<div class="text-md-right dataTables_filter" id="dataTable_filter">
-											<label>
-												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="产权人" v-model="ownername">
-											</label>
-										</div>
-									</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<span>Test spin</span>
 									
-									<div class="col-md-2 text-nowrap">
-										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="roomquery()">查询</button>
-											
-									</div>
-
-
-
-
-
-
-								</div>
-								<div class="table-responsive table mt-2" id="dataTable" role="grid"
-									aria-describedby="dataTable_info">
-									<table class="table my-0" id="dataTable">
-										<thead>
-											<tr>
-												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
-												<th><strong>状态</strong></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr></tr>
-											
-											<tr v-for="(item, index) in list">
-												<td>{{index + 1 }}</td>
-												<td>{{item.roomid}}</td>
-												<td>{{item.roomname}}</td>
-												<td>{{item.buildingid}}</td>
-												<td>{{item.ownerid}}</td>
-												<td>{{item.area}}</td>
-												<td>{{item.tenement}}</td>
-												<td>{{item.status}}</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="listshow = !listshow">更新</button>
-												</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)">删除</button>
-												</td>
-												
-												<div class="dropdown" v-show="listshow">
-													<hr >
-													
-											
-												    <div class="col-md-2 text-nowrap">
-												    	<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-												    		<label style="font-size: 15px;">楼宇:&nbsp;<select
-												    				class="form-control form-control-sm custom-select custom-select-sm"
-												    				v-model="buildingid">
-												    				<option value="1" selected="A">A</option>
-												    				<option value="2">B</option>
-												    			</select>&nbsp;</label>
-												    	</div>
-												    </div>
-													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="listshow = !listshow">提交更新</button>
-												</div>
-											</tr>
-											
-											<!-- <tr>
-												<td>张三</td>
-												<td>Chief Executive Officer(CEO)</td>
-												<td>London</td>
-												<td>47</td>
-												<td>2009/10/09<br></td>
-												<td>$1,200,000</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-													@click="userupdate()">更新</button>
-												</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-													@click="userdelete()">删除</button>
-												</td>
-											</tr> -->
-											<tr></tr>
-
-
-										</tbody>
-										<tfoot>
-											<tr>
-												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
-												<th><strong>状态</strong></th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
+								</div> 
+								
+								<!-- 底部元素从这里开始 -->
 								<div class="row">
 									<div class="col-md-6 align-self-center">
 										<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
@@ -286,6 +142,7 @@
 														aria-label="Next"><span aria-hidden="true">»</span></a></li>
 											</ul> -->
 											<!-- 此部分为处理分页跳转 暂不实现-->
+											
 										</nav>
 									</div>
 								</div>
@@ -312,7 +169,6 @@
 				el: "#app",
 				data: {
 					iscorrect: false,
-					listshow:false,
 					buildingid: "",
 					ownerid: "",
 					ownername: "",
