@@ -1,8 +1,11 @@
 package com.max.slw.api;
 
 import cn.hutool.json.JSONUtil;
-import com.max.slw.api.DemoBean;
-import com.max.slw.dao.*;
+import com.max.slw.dao.FunctionsforProgramme;
+import com.max.slw.dao.Hutoolway;
+
+import com.max.slw.dao.Room;
+import com.max.slw.dao.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="Roomupdateapi",urlPatterns = "/Roomupdateapi")
-public class Roomupdateapi extends HttpServlet {
+@WebServlet(name="Fulldeleteapi",urlPatterns = "/Fulldeleteapi")
+public class Fulldeleteapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*String updatetype = req.getParameter("updatetype");
-        String updatecontent = req.getParameter("updatecontent");
-        String roomid = req.getParameter("roomid");
-        System.out.println(updatetype);
-        System.out.println(roomid);
+        String tabletype=req.getParameter("tabletype");
+        String identifier = req.getParameter("identifier");
         FunctionsforProgramme way = new FunctionsforProgramme();
-        Room room=new Room();
-        room.setRoomid(Integer.parseInt(roomid));
-        int result = way.roomupdate(room,updatetype,updatecontent);
+        int result=way.Fulldelete(tabletype,identifier);
         boolean blres = (result != 0);
         var bean = new DemoBean();
         bean.setRes(blres);
@@ -32,6 +30,7 @@ public class Roomupdateapi extends HttpServlet {
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter pw = resp.getWriter();
         pw.write(json);
-        pw.flush();*/
+        pw.flush();
+
     }
 }

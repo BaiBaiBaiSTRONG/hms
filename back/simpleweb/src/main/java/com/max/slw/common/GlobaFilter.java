@@ -15,6 +15,7 @@ public class GlobaFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("use filter");
+        System.out.println("hahahaah");
         request.setCharacterEncoding( "UTF-8" );
         response.setCharacterEncoding( "UTF-8" );
 
