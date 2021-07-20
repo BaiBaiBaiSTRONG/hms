@@ -73,14 +73,14 @@ public class FunctionsforProgramme {
         list = Db.use().query("select roomid,roomname,buildingid,ownerid,area,tenement,status from "+tabletype+" where "+querytype +"=?",querycontent);
         return list;
     }
-    public int feesum(String ownerid){return 0;};
+    /*public int feesum(String ownerid){return 0;};
     public List<Entity> expensequery(String querytype,String querycontent){List<Entity> list=null;return list;};
     public List<Entity> expensebyperiod(Date date1,Date date2){List<Entity> list=null;return list;};
-    public int updateexpense(Expense expense,String updatetype,String updatecontent){return 0;};
+    //public int updateexpense(Expense expense,String updatetype,String updatecontent){return 0;};
     public List<Entity> officequery(String querytype,String querycontent){List<Entity> list=null;return list;};
     public int officeupdate(String officeid,String updatetype,String updatecontent ){return 0;}
     public int officeinsert(String officeid,String filesum,String keysum,String status){return 0;};
-    public int parkingupdate(String Parkingid,String updatetype,String updatecontent){return 0;};
+    public int parkingupdate(String Parkingid,String updatetype,String updatecontent){return 0;};*/
 
 
 

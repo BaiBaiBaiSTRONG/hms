@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 public class Roomupdateapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String updatetype = req.getParameter("updatetype");
+        /*String updatetype = req.getParameter("updatetype");
         String updatecontent = req.getParameter("updatecontent");
         String roomid = req.getParameter("roomid");
         System.out.println(updatetype);
@@ -32,6 +32,6 @@ public class Roomupdateapi extends HttpServlet {
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter pw = resp.getWriter();
         pw.write(json);
-        pw.flush();
+        pw.flush();*/
     }
 }
