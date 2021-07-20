@@ -51,6 +51,17 @@ public class FunctionsforProgramme {
         list = Db.use().query("select roomid,roomname,buildingid,ownerid,area,tenement,status from "+tabletype+" where "+querytype +"=?",querycontent);
         return list;
     }
+    public int Fulldelete(String tabletype,String identifier)
+    {
+        String tableid= tabletype+"id";
+        try {
+            int var=Db.use().execute("delete from "+tabletype+" where "+tableid+"=?",identifier);
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+    }
     public int feesum(String ownerid){return 0;};
     public List<Entity> expensequery(String querytype,String querycontent){List<Entity> list=null;return list;};
     public List<Entity> expensebyperiod(Date date1,Date date2){List<Entity> list=null;return list;};
