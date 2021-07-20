@@ -50,7 +50,7 @@ public class FunctionsforProgramme {
     public List<Entity> Fullquery(String tabletype,String querytype,String querycontent) throws SQLException
     {
         List<Entity> list = null;
-        list = Db.use().query("select roomid,roomname,buildingid,ownerid,area,tenement,status from "+tabletype+" where "+querytype +"=?",querycontent);
+        list = Db.use().query("select * from "+tabletype+" where "+querytype +"=?",querycontent);
         return list;
     }
     public int Fulldelete(String tabletype,String identifier)
