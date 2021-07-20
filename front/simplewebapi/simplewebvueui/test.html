@@ -100,18 +100,17 @@
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
-								<div class="col-md-4 text-nowrap"></div>
-
+								<div class="col-md-3 text-nowrap"></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
-										style="color: #646770;background-color: #149063;"
+										style="color: #f9f9f9;background-color: #8b8b8b;"
 										onClick="location.href='1-1.html'">房产信息</button>
-
-
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
 										onClick="location.href='1-2.html'">楼宇管理</button>
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 									<button class="btn btn-primary" type="button" style="color: white;"
@@ -151,6 +150,7 @@
 										</div>
 									</div>
 									<div class="col-md-3 text-nowrap">
+										
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
@@ -229,7 +229,7 @@
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)">删除</button>
+														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -272,7 +272,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="listshow = !listshow">取消</button>
+																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 
 														</div>
@@ -354,7 +354,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow">取消</button>
+																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 														</div>
 
