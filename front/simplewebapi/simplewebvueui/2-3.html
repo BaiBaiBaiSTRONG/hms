@@ -97,23 +97,32 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;收费管理</h3>
-							<div class="card-header py-2">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<INPUT name="pclog" style="color: #224abe;" type="button" value="收费记录"
-									onClick="location.href='2-1.html'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<INPUT name="pclog" style="color: #224abe;" type="button" value="收费报表"
-									onClick="location.href='2-2.html'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<INPUT name="pclog" style="color: #646770;" type="button" value="统计查询"
-									onClick="location.href='2-3.html'">
+							<br>
+							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
+							<div class="row">
+								<div class="col-md-5 text-nowrap"></div>
+								<div class="col-md-3 text-nowrap"></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="col-md-1 text-nowrap">
+									<button class="btn btn-primary" type="button"
+										type="button" style="color: white;"
+										onClick="location.href='1-1.html'">房产信息</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+									<button class="btn btn-primary" type="button" style="color: white;"
+										onClick="location.href='1-2.html'">楼宇管理</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+									<button class="btn btn-primary" style="color: #f9f9f9;background-color: #8b8b8b;"
+										onClick="location.href='1-3.html'">业务管理</button>
+								</div>
+
 							</div>
+
 							<div class="card-body" id="app">
 								<div class="row">
-									<!-- 
+									<!--
 										<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
 											<label>Show&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm">
@@ -133,7 +142,7 @@
 									<!-- 简易搜索 暂不实现 -->
 									<div class="col-md-3 text-nowrap">
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-											<label style="font-size: 15px;">小区:&nbsp;<select
+											<label style="font-size: 15px;">小区：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm">
 													<option value="mo" selected="">大连理工大学开发区校区</option>
 													<option value="25">25</option>
@@ -141,37 +150,54 @@
 												</select>&nbsp;</label>
 										</div>
 									</div>
-									<div class="col-md-2 text-nowrap">
+									<div class="col-md-3 text-nowrap">
+										
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-											<label style="font-size: 15px;">楼宇:&nbsp;<select
+
+											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
-													v-model="buildingid">
-													<option value="1" selected="">A</option>
-													<option value="2">B</option>
+													v-model="searchtype">
+													<option value="roomname" selected="">房间名</option>
+													<option value="ownerid">产权人号</option>
+													<option value="buildingid">楼宇号</option>
+													<option value="tenement">住户</option>
+													<option value="status">状态</option>
 												</select>&nbsp;</label>
+
 										</div>
 									</div>
+
+
+
 									<div class="col-md-2 text-nowrap">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="产权人" v-model="ownername">
+													aria-controls="dataTable" placeholder="查询依据"
+													v-model="searchcontent">
 											</label>
 										</div>
 									</div>
-									<div class="col-md-2 text-nowrap">
+
+									<div class="col-md-2 text-nowrap"></div>
+
+
+									<div class="col-md-1 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 											@click="roomquery()">查询</button>
+
 									</div>
 
+									<div class="col-md-1 text-nowrap" style="align-items: center;">
+										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
+											@click="isupdateshow =!isupdateshow">插入</button>
 
-
-
-
+									</div>
 
 								</div>
 								<div class="table-responsive table mt-2" id="dataTable" role="grid"
 									aria-describedby="dataTable_info">
+
 									<table class="table my-0" id="dataTable">
 										<thead>
 											<tr>
@@ -187,6 +213,7 @@
 										</thead>
 										<tbody>
 											<tr></tr>
+
 											<tr v-for="(item, index) in list">
 												<td>{{index + 1 }}</td>
 												<td>{{item.roomid}}</td>
@@ -198,56 +225,172 @@
 												<td>{{item.status}}</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomupdate()">更新</button>
+														type="submit"
+														@click="listshow = !listshow;updatejump(item.roomid);">更新</button>
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)">删除</button>
+														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
-											</tr>
-											<!-- <tr>
-												<td>张三</td>
-												<td>Chief Executive Officer(CEO)</td>
-												<td>London</td>
-												<td>47</td>
-												<td>2009/10/09<br></td>
-												<td>$1,200,000</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-													@click="userupdate()">更新</button>
-												</td>
-												<td>
-													<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-													@click="userdelete()">删除</button>
-												</td>
-											</tr> -->
-											<tr></tr>
 
+												<div class="dropdown" v-show="listshow">
+													<hr>
+													<div class="row">
+														<div class="col-md-3 text-nowrap">
+															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
+																	class="form-control form-control-sm custom-select custom-select-sm"
+																	v-model="changetype">
+																	<option value="roomname" selected="A">房间名</option>
+																	<option value="buildingid">楼宇号</option>
+																	<option value="ownerid">产权人号</option>
+																	<option value="tenement">住户</option>
+																	<option value="status">状态</option>
+																	<option value="area">面积</option>
+																</select>&nbsp;</label>
+														</div>
+														<div class="col-md-3 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="更改的数据"
+																	v-model="changedata">&nbsp;&nbsp;
+															</div>
+														</div>
+														
+														<div class="col-md-3 text-nowrap"></div>
+														
+														<div class="col-md-2 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<button
+																	class="btn btn-primary btn-block text-white btn-user"
+																	type="submit"
+																	@click="listshow = !listshow&roomupdate()">提交更新</button>
 
-										</tbody>
-										<tfoot>
-											<tr>
-												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
-												<th><strong>状态</strong></th>
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap" style="text-align: right;">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<button
+																	class="btn btn-primary btn-block text-white btn-user"
+																	type="submit"
+																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+															</div>
+
+														</div>
+													</div>
+												</div>
+
+												<div class="dropdown" v-show="isupdateshow">
+													<hr>
+													<div class="row">
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="房间号"
+																	v-model="insertroomnumber">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="房间名"
+																	v-model="insertroomname">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="楼宇号"
+																	v-model="insertbuildingid">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="产权人号"
+																	v-model="insertownerid">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="面积"
+																	v-model="insertarea">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="住户"
+																	v-model="inserttenement">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="状态"
+																	v-model="insertstatus">&nbsp;&nbsp;
+															</div>
+														</div>
+														
+														<div class="col-md-2 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<button
+																	class="btn btn-primary btn-block text-white btn-user"
+																	type="submit"
+																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
+
+															</div>
+														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<button
+																	class="btn btn-primary btn-block text-white btn-user"
+																	type="submit"
+																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+															</div>
+														</div>
+
+													</div>
+												</div>
 											</tr>
-										</tfoot>
-									</table>
 								</div>
-								<div class="row">
-									<div class="col-md-6 align-self-center">
-										<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-										</p>
-									</div>
-									<div class="col-md-6">
-										<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-											
-											<!-- <ul class="pagination">
+							</div>
+
+							<tr></tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th><strong>序号</strong></th>
+									<th><strong>房间号</strong></th>
+									<th><strong>房间名</strong></th>
+									<th><strong>楼宇号</strong></th>
+									<th><strong>产权人号</strong></th>
+									<th><strong>面积</strong></th>
+									<th><strong>住户</strong></th>
+									<th><strong>状态</strong></th>
+								</tr>
+							</tfoot>
+							</table>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 align-self-center">
+								<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+								</p>
+							</div>
+							<div class="col-md-6">
+								<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+
+									<!-- <ul class="pagination">
 												<li class="page-item disabled"><a class="page-link" href="#"
 														aria-label="Previous"><span aria-hidden="true">«</span></a></li>
 												<li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -256,21 +399,21 @@
 												<li class="page-item"><a class="page-link" href="#"
 														aria-label="Next"><span aria-hidden="true">»</span></a></li>
 											</ul> -->
-											<!-- 此部分为处理分页跳转 暂不实现-->
-										</nav>
-									</div>
-								</div>
+									<!-- 此部分为处理分页跳转 暂不实现-->
+								</nav>
 							</div>
 						</div>
 					</div>
 				</div>
-				<footer class="bg-white sticky-footer">
-					<div class="container my-auto">
-						<div class="text-center my-auto copyright"><span>Copyright © Baix3XiaoRuo 赵灏 张忆馨 杨斯涵</span>
-						</div>
-					</div>
-				</footer>
-			</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+			</div>
+		</div>
+		<footer class="bg-white sticky-footer">
+			<div class="container my-auto">
+				<div class="text-center my-auto copyright"><span>Copyright © Baix3XiaoRuo 赵灏 张忆馨 杨斯涵</span>
+				</div>
+			</div>
+		</footer>
+		</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 		</div>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -283,31 +426,127 @@
 				el: "#app",
 				data: {
 					iscorrect: false,
+					listshow: false,
 					buildingid: "",
-					ownerid: "",
-					ownername: "",
+					searchtype: "",
+					searchcontent: "",
 					list: [],
+					tmptext: "",
+					changetype: "",
+					changedata: "",
+					isupdateshow: false,
+					insertroomnumber: "",
+					insertarea: "",
+					insertbuildingid: "",
+					insertownerid: "",
+					insertroomname: "",
+					insertstatus: "",
+					inserttenement: "",
+					deleteid: ""
 				},
 				methods: {
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					roomupdate: function() {
+					roominsert: function() {
+						console.log(this.insertroomid);
+						console.log(this.insertroomname);
+						console.log(this.insertbuildingid);
+						console.log(this.insertownerid);
+						console.log(this.insertarea);
+						console.log(this.inserttenement);
+						console.log(this.insertstatus);
 
-					},
-					roomdelete: function(roomid) {
-						console.log(roomid);
-					},
-					roomquery: function() {
-						console.log(this.buildingid);
-						let param = new URLSearchParams();
-						param.append('buildingid', this.buildingid);
+						/* let param = new URLSearchParams();
+						param.append('pointer', this.tmptext);
+						param.append('tabletype', "room");
+						param.append('updatetype', this.changetype);
+						param.append('updatecontent', this.changedata);
+						
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/userqueryapi",
+							url: "http://localhost:8888/simpleweb/Fullupdateapi",
+							data: param
+						}).then((res) => {
+							console.log(res);
+							alert("插入成功");
+							location.reload();
+						}).catch((error) => {
+							console.log(error);
+						}); */
+
+					},
+					roomupdate: function() {
+						console.log(this.changetype);
+						console.log(this.changedata);
+						let param = new URLSearchParams();
+						param.append('pointer', this.tmptext);
+						param.append('tabletype', "room");
+						param.append('updatetype', this.changetype);
+						param.append('updatecontent', this.changedata);
+						axios({
+							headers: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							method: "post",
+							url: "http://localhost:8888/simpleweb/Fullupdateapi",
+							data: param
+						}).then((res) => {
+							console.log(res);
+							alert("选中的值已经更改为" + this.changedata);
+							location.reload();
+						}).catch((error) => {
+							console.log(error);
+						});
+
+
+					},
+					roomdelete: function(roomid) {
+						console.log(roomid);
+						this.deleteid = roomid;
+						let param = new URLSearchParams();
+						param.append('tabletype', "room");
+						param.append('identifier', this.deleteid);
+						axios({
+							headers: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							method: "post",
+							url: "http://localhost:8888/simpleweb/Fulldeleteapi",
+							data: param
+						}).then((res) => {
+							console.log(res.data);
+							if (res.data.Res = true) {
+								alert("删除成功！");
+								location.reload();
+							} else {
+
+							}
+
+						}).catch((error) => {
+							console.log(error);
+						});
+					},
+					updatejump: function(roomid) {
+						this.tmptext = roomid;
+						console.log(this.tmptext);
+					},
+					roomquery: function() {
+						console.log(this.searchtype);
+						console.log(this.searchcontent);
+						let param = new URLSearchParams();
+						param.append('tabletype', "room");
+						param.append('querytype', this.searchtype);
+						param.append('querycontent', this.searchcontent);
+						axios({
+							headers: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							method: "post",
+							url: "http://localhost:8888/simpleweb/Fullquerynewapi",
 							data: param
 						}).then((res) => {
 							console.log(res.data);
