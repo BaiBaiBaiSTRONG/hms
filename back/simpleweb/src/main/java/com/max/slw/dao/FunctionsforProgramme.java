@@ -10,7 +10,7 @@ public class FunctionsforProgramme {
 
     public List<Entity> roomquery(int a) throws SQLException {
         List<Entity> list = null;
-        list = Db.use().query("select roomid,roomname,buildingid,ownerid,area,tenement,status from room natural join building where buildingid =?",a);
+        list = Db.use().query("select roomid,roomname,bulidingid,ownerid,area,tenement,status from owner natural join room natural join expense natural join building natural join parking natural join request where building id =?","");
         return list;
     }
     public int insertroom(Room room)
@@ -27,20 +27,22 @@ public class FunctionsforProgramme {
     public int deleteroom(Room room){
         try {
             int var = Db.use().execute("delete from room where roomid=?",room.getRoomid());
-                    return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return 0;
-        }
-    }
-    public int updateroomname(Room room,String name){
-        try {
-            int var=Db.use().execute("update room set roomname=? where roomid=?",name,room.getRoomid());
             return var;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return 0;
         }
+    }
+    public int roomupdate(Room room,String updatetype,String updatecontent)
+    {
+        try {
+            int var=Db.use().execute("update room set "+updatetype+"=? where roomid=?",updatecontent,room.getRoomid());
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+
 
     }
     public int updateownerid(Room room,String ownerid){
@@ -53,5 +55,30 @@ public class FunctionsforProgramme {
         }
 
     }
+
+
+    public int deletebuilding(Building building) {
+        try {
+            int var = Db.use().execute("delete from building where buildingid=?", building.getBuildingid());
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+    }
+    public int buildingupdate(Building building,String updatetype,String updatecontent)
+    {
+        try {
+            int var=Db.use().execute("update building set "+updatetype+"=? where buildingid=?",updatecontent,building.getBuildingid());
+            return var;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+
+
+    }
 }
+
+
 

@@ -1,40 +1,44 @@
 com/max/slw/dao/Person.java
  com.max.slw.dao.Person
-com/max/slw/api/Roomnameupdateapi.java
- com.max.slw.api.Roomnameupdateapi
+com/max/slw/api/UserDeleteApi.java
+ com.max.slw.api.UserDeleteApi
 com/max/slw/dao/Room.java
  com.max.slw.dao.Room
 com/max/slw/api/UserQuaryApi.java
  com.max.slw.api.UserQuaryApi
-com/max/slw/api/UserDeleteApi.java
- com.max.slw.api.UserDeleteApi
-com/max/slw/api/RoominsetApi.java
- com.max.slw.api.RoominsetApi
-com/max/slw/api/Owneridupdateapi.java
- com.max.slw.api.Owneridupdateapi
+com/max/slw/dao/DemoDao.java
+ com.max.slw.dao.DemoDao
+com/max/slw/api/UserUpdateApi.java
+ com.max.slw.api.UserUpdateApi
+com/max/slw/dao/Hutoolway.java
+ com.max.slw.dao.Hutoolway
 com/max/slw/common/GlobaFilter.java
  com.max.slw.common.GlobaFilter
 com/max/slw/api/DemoSlt.java
  com.max.slw.api.DemoSlt
 com/max/slw/api/UserAddApi.java
  com.max.slw.api.UserAddApi
-com/max/slw/dao/Buliding.java
- com.max.slw.dao.Buliding
+com/max/slw/api/DemoBean.java
+ com.max.slw.api.DemoBean
 com/max/slw/dao/Owner.java
  com.max.slw.dao.Owner
 com/max/slw/dao/User.java
  com.max.slw.dao.User
-com/max/slw/dao/Hutoolway.java
- com.max.slw.dao.Hutoolway
-com/max/slw/api/DemoBean.java
- com.max.slw.api.DemoBean
-com/max/slw/api/UserUpdateApi.java
- com.max.slw.api.UserUpdateApi
-com/max/slw/dao/FunctionsforProgramme.java
- com.max.slw.dao.FunctionsforProgramme
-com/max/slw/dao/DemoDao.java
- com.max.slw.dao.DemoDao
-com/max/slw/api/Roomdeleteapi.java
- com.max.slw.api.Roomdeleteapi
+com/max/slw/api/Buildingdeleteapi.java
+ com.max.slw.api.Buildingdeleteapi
+com/max/slw/api/Roomupdateapi.java
+ com.max.slw.api.Roomupdateapi
 com/max/slw/api/roomqueryapi.java
  com.max.slw.api.roomqueryapi
+com/max/slw/api/RoominsetApi.java
+ com.max.slw.api.RoominsetApi
+com/max/slw/dao/Building.java
+ com.max.slw.dao.Building
+com/max/slw/dao/FunctionsforProgramme.java
+ com.max.slw.dao.FunctionsforProgramme
+com/max/slw/api/Roomdeleteapi.java
+ com.max.slw.api.Roomdeleteapi
+com/max/slw/api/Buildingupdateapi.java
+ com.max.slw.api.Buildingupdateapi
+com/max/slw/api/Owneridupdateapi.java
+ com.max.slw.api.Owneridupdateapi

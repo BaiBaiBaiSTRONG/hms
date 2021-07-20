@@ -24,7 +24,7 @@ public class Owneridupdateapi extends HttpServlet {
         FunctionsforProgramme way = new FunctionsforProgramme();
         Room room= new Room();
         room.setRoomid(Integer.parseInt(roomid));
-        int result = way.updateroomname(room,ownerid);
+        int result = way.updateownerid(room,ownerid);
         boolean blres = (result != 0);
         var bean = new DemoBean();
         bean.setRes(blres);

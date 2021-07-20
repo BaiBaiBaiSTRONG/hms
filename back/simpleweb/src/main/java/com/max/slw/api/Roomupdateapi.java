@@ -1,6 +1,7 @@
 package com.max.slw.api;
 
 import cn.hutool.json.JSONUtil;
+import com.max.slw.api.DemoBean;
 import com.max.slw.dao.*;
 
 import javax.servlet.ServletException;
@@ -11,16 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="Roomnameupdateapi",urlPatterns = "/Roomnameupdateapi")
-public class Roomnameupdateapi extends HttpServlet {
+@WebServlet(name="Roomupdateapi",urlPatterns = "/Roomupdateapi")
+public class Roomupdateapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String roomname = req.getParameter("roomname");
+        String updatetype = req.getParameter("updatetype");
+        String updatecontent = req.getParameter("updatecontent");
         String roomid = req.getParameter("roomid");
+        System.out.println(updatetype);
+        System.out.println(roomid);
         FunctionsforProgramme way = new FunctionsforProgramme();
         Room room=new Room();
         room.setRoomid(Integer.parseInt(roomid));
-       int result = way.updateroomname(room,roomname);
+        int result = way.roomupdate(room,updatetype,updatecontent);
         boolean blres = (result != 0);
         var bean = new DemoBean();
         bean.setRes(blres);
@@ -29,6 +33,5 @@ public class Roomnameupdateapi extends HttpServlet {
         PrintWriter pw = resp.getWriter();
         pw.write(json);
         pw.flush();
-
     }
 }
