@@ -14,17 +14,24 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "roomqueryapi",urlPatterns = "/userqueryapi")
-public class roomqueryapi extends HttpServlet {
+@WebServlet(name = "Fullquerynewapi",urlPatterns = "/Fullquerynewapi")
+public class Fullqueryapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+<<<<<<< HEAD:back/simpleweb/src/main/java/com/max/slw/api/roomqueryapi.java
         String id = req.getParameter("buildingid");
         System.out.println(id);
+=======
+        String tabletype = req.getParameter("tabletype");
+        String querytype = req.getParameter("querytype");
+        String querycontent = req.getParameter("querycontent");
+        System.out.println(tabletype);
+>>>>>>> 9bd6bd0b8cf3c20993e99c0646aabf4a9be1ac5d:back/simpleweb/src/main/java/com/max/slw/api/Fullqueryapi.java
         List<Entity> list = null;
         FunctionsforProgramme way=new FunctionsforProgramme();
         try {
 
-            list = way.roomquery(Integer.parseInt(id));
+            list = way.Fullquery(tabletype,querytype,querycontent);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

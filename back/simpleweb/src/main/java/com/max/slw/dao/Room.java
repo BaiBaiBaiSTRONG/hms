@@ -10,7 +10,13 @@ public class Room {
     public int area;
     public String tenement;
     public String status;
+<<<<<<< HEAD
     public Room(){}
+=======
+    public Room(){
+
+    }
+>>>>>>> 9bd6bd0b8cf3c20993e99c0646aabf4a9be1ac5d
     public Room(int roomid, String roomname, int buildingid, int ownerid, int area, String tenement, String status) {
         this.roomid = roomid;
         this.roomname = roomname;

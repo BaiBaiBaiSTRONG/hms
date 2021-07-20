@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.rmi.server.ServerCloneException;
 
-@WebServlet(name = "RoominsertApi",urlPatterns = "/roominsertapi")
+@WebServlet(name = "RoominsertApi",urlPatterns = "/Roominsertapi")
 public class RoominsetApi extends HttpServlet {
     @Override
-        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
             String roomid = req.getParameter("roomid");
             String roomname = req.getParameter("roomname");
             String buildingid=req.getParameter("buildingid");
@@ -25,9 +25,13 @@ public class RoominsetApi extends HttpServlet {
             String tenement=req.getParameter("tenement");
             String status= req.getParameter("status");
             FunctionsforProgramme way=new FunctionsforProgramme();
+        System.out.println(roomid);
         System.out.println(roomname);
-        System.out.println(Integer.parseInt(roomid));
-
+        System.out.println(buildingid);
+        System.out.println(ownerid);
+        System.out.println(area);
+        System.out.println(tenement);
+        System.out.println(status);
 
             Room room= new Room(Integer.parseInt(roomid),roomname,Integer.parseInt(buildingid),Integer.parseInt(ownerid),Integer.parseInt(area),tenement,status);
             int result = way.insertroom(room);

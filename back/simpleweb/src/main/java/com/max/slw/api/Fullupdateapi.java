@@ -12,19 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="Owneri1dupdateapi",urlPatterns = "/Owneri1dupdateapi")
-public class Owneridupdateapi extends HttpServlet {
+@WebServlet(name="Fullupdateapi",urlPatterns = "/Fullupdateapi")
+public class Fullupdateapi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("hahahaah");
-        String ownerid = req.getParameter("ownerid");
-        String roomid = req.getParameter("roomid");
-        System.out.println(ownerid);
-        System.out.println(roomid);
+        String pointer = req.getParameter("pointer");
+        String tabletype = req.getParameter("tabletype");
+        String updatetype = req.getParameter("updatetype");
+        String updatecontent = req.getParameter("updatecontent");
+        System.out.println(pointer);
         FunctionsforProgramme way = new FunctionsforProgramme();
+<<<<<<< HEAD:back/simpleweb/src/main/java/com/max/slw/api/Owneridupdateapi.java
         Room room= new Room();
         room.setRoomid(Integer.parseInt(roomid));
         int result = way.updateownerid(room,ownerid);
+=======
+        int result = way.Fullupdate(pointer,tabletype,updatetype,updatecontent);
+>>>>>>> 9bd6bd0b8cf3c20993e99c0646aabf4a9be1ac5d:back/simpleweb/src/main/java/com/max/slw/api/Fullupdateapi.java
         boolean blres = (result != 0);
         var bean = new DemoBean();
         bean.setRes(blres);
@@ -33,6 +37,5 @@ public class Owneridupdateapi extends HttpServlet {
         PrintWriter pw = resp.getWriter();
         pw.write(json);
         pw.flush();
-
     }
 }
