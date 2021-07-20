@@ -190,7 +190,7 @@
 
 									<div class="col-md-1 text-nowrap" style="align-items: center;">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="isupdateshow =!isupdateshow">插入</button>
+											@click="isinsertshow =!isinsertshow">插入</button>
 
 									</div>
 
@@ -205,7 +205,9 @@
 												<th><strong>房间号</strong></th>
 												<th><strong>房间名</strong></th>
 												<th><strong>楼宇号</strong></th>
+												<th><strong>产权人号</strong></th>
 												<th><strong>产权人</strong></th>
+												<th><strong>年龄</strong></th>
 												<th><strong>住户</strong></th>
 												<th><strong>状态</strong></th>
 											</tr>
@@ -219,6 +221,8 @@
 												<td>{{item.roomname}}</td>
 												<td>{{item.buildingid}}</td>
 												<td>{{item.ownerid}}</td>
+												<td>{{item.ownername}}</td>
+												<td>{{item.age}}</td>
 												<td>{{item.tenement}}</td>
 												<td>{{item.status}}</td>
 												<td>
@@ -277,7 +281,7 @@
 													</div>
 												</div>
 
-												<div class="dropdown" v-show="isupdateshow">
+												<div class="dropdown" v-show="isinsertshow">
 													<hr>
 													<div class="row">
 
@@ -342,7 +346,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
+																	@click="isinsertshow = !isinsertshow&roominsert()">提交插入</button>
 
 															</div>
 														</div>
@@ -352,7 +356,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	@click="isinsertshow = !isinsertshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 														</div>
 
@@ -370,7 +374,9 @@
 									<th><strong>房间号</strong></th>
 									<th><strong>房间名</strong></th>
 									<th><strong>楼宇号</strong></th>
+									<th><strong>产权人号</strong></th>
 									<th><strong>产权人</strong></th>
+									<th><strong>年龄</strong></th>
 									<th><strong>住户</strong></th>
 									<th><strong>状态</strong></th>
 								</tr>
@@ -430,7 +436,7 @@
 					tmptext: "",
 					changetype: "",
 					changedata: "",
-					isupdateshow: false,
+					isinsertshow: false,
 					insertroomnumber: "",
 					insertarea: "",
 					insertbuildingid: "",
@@ -534,7 +540,7 @@
 						console.log(this.searchtype);
 						console.log(this.searchcontent);
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "room inner join building using (buildingid)");
 						param.append('querytype', this.searchtype);
 						param.append('querycontent', this.searchcontent);
 						axios({
