@@ -98,6 +98,7 @@
 					<div class="container-fluid">
 						<div class="card shadow">
 							<br>
+							<br>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
@@ -451,26 +452,22 @@
 						console.log(this.buildingid);
 					},
 					roominsert: function() {
-						console.log(this.insertroomid);
-						console.log(this.insertroomname);
-						console.log(this.insertbuildingid);
-						console.log(this.insertownerid);
-						console.log(this.insertarea);
-						console.log(this.inserttenement);
-						console.log(this.insertstatus);
-
-						/* let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
+						
+						let param = new URLSearchParams();
+						
+						param.append('roomid', this.insertroomid);
+						param.append('roomname',this.insertroomname);
+						param.append('buildingid', this.insertbuildingid);
+						param.append('ownerid', this.insertownerid);
+						param.append('area', this.insertarea);
+						param.append('status', this.insertstatus);
 						
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
+							url: "http://localhost:8888/simpleweb/Roominsertapi",
 							data: param
 						}).then((res) => {
 							console.log(res);
@@ -478,7 +475,7 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); */
+						}); 
 
 					},
 					roomupdate: function() {

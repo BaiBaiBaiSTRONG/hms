@@ -16,7 +16,7 @@ import java.rmi.server.ServerCloneException;
 @WebServlet(name = "RoominsertApi",urlPatterns = "/Roominsertapi")
 public class RoominsetApi extends HttpServlet {
     @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
             String roomid = req.getParameter("roomid");
             String roomname = req.getParameter("roomname");
             String buildingid=req.getParameter("buildingid");
