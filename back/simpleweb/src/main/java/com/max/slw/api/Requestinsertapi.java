@@ -15,20 +15,21 @@ import java.io.PrintWriter;
 import java.rmi.server.ServerCloneException;
 import java.text.ParseException;
 
-@WebServlet(name = "Expenseinsertapi",urlPatterns = "/Expenseinsertapi")
-public class Expenseinsertapi extends HttpServlet {
+@WebServlet(name = "Requestinsertapi",urlPatterns = "/Requestinsertapi")
+public class Requestinsertapi extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        String expenseid = req.getParameter("expenseid");
-        String expenseall = req.getParameter("expenseall");
-        String expenseneed=req.getParameter("expenseneed");
+        String requestid = req.getParameter("requestid");
+        String requestcontent = req.getParameter("requestcontent");
+        String requesttype=req.getParameter("requesttype");
+        String requestsatatus=req.getParameter("requestsatatus");
+        String staffid=req.getParameter("staffid");
         String ownerid=req.getParameter("ownerid");
-        String expensetype=req.getParameter("expensetype");
-        String edate=req.getParameter("edate");
         FunctionsforProgramme way=new FunctionsforProgramme();
         int result = 0;
         try {
-            result = way.expenseinsert(expenseid,expenseall,expenseneed,ownerid,expensetype,edate);
+            result = way.requestinsert(requestid,requestcontent,requesttype,requestsatatus,staffid,ownerid);
         } catch (ParseException e) {
             e.printStackTrace();
         }
