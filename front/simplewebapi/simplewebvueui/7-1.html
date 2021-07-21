@@ -98,24 +98,20 @@
 					<div class="container-fluid">
 						<div class="card shadow">
 							<br>
-							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
+							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;产权人服务管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
-										type="button" style="color: white;"
-										onClick="location.href='1-1.html'">房产信息</button>
+										type="button" style="color: #f9f9f9;background-color: #8b8b8b;"
+										onClick="location.href='7-1.html'">费用查询</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
-										onClick="location.href='1-2.html'">楼宇管理</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										onClick="location.href='7-2.html'">投诉管理</button>
 
-
-									<button class="btn btn-primary" style="color: #f9f9f9;background-color: #8b8b8b;"
-										onClick="location.href='1-3.html'">业务管理</button>
 								</div>
 
 							</div>
@@ -150,49 +146,59 @@
 												</select>&nbsp;</label>
 										</div>
 									</div>
-									<div class="col-md-3 text-nowrap">
+									<div class="col-md-2 text-nowrap">
 										
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
-													<option value="roomname" selected="">房间名</option>
-													<option value="ownerid">产权人号</option>
-													<option value="buildingid">楼宇号</option>
-													<option value="tenement">住户</option>
-													<option value="status">状态</option>
+													<option value="ownerid" selected="">产权人号</option>
+													<option value="ownername" >产权人姓名</option>
+													<option value="expenseid">账单号</option>
+													<option value="expensetype">费用类型</option>
+													<option value="edate">产生时间</option>
 												</select>&nbsp;</label>
 
 										</div>
 									</div>
+									<div class="col-md-1 text-nowrap">
+									</div>
 
 
 
-									<div class="col-md-2 text-nowrap">
+									<div class="col-mt-2 text-nowrap">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
 													aria-controls="dataTable" placeholder="查询依据"
-													v-model="searchcontent">
+													v-model="searchcontent" v-show="!dateshowcontroll()">
 											</label>
 										</div>
 									</div>
+									
+									<input type = "date" class="form-control form-control-sm"
+											aria-controls="dataTable" style = "width: 200px;"
+											v-model="startdate" v-show="dateshowcontroll()">
+											
+									<input type = "date" class="form-control form-control-sm"
+											aria-controls="dataTable" style = "width: 200px;"
+											v-model="enddate"v-show="dateshowcontroll()">
 
-									<div class="col-md-2 text-nowrap"></div>
+									<div class="col-mt-1 text-nowrap"></div>
 
 
 									<div class="col-md-1 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="roomquery()">查询</button>
+											@click="expensequery()">查询</button>
 
 									</div>
 
-									<div class="col-md-1 text-nowrap" style="align-items: center;">
+				<!-- 					<div class="col-md-1 text-nowrap" style="align-items: center;">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 											@click="isupdateshow =!isupdateshow">插入</button>
 
-									</div>
+									</div> -->
 
 								</div>
 								<div class="table-responsive table mt-2" id="dataTable" role="grid"
@@ -201,14 +207,16 @@
 									<table class="table my-0" id="dataTable">
 										<thead>
 											<tr>
+												
+											
 												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
 												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
-												<th><strong>状态</strong></th>
+												<th><strong>产权人姓名</strong></th>
+												<th><strong>产生费用</strong></th>
+												<th><strong>应缴费用</strong></th>
+												<th><strong>费用类型</strong></th>
+												<th><strong>产生时间</strong></th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -216,21 +224,21 @@
 
 											<tr v-for="(item, index) in list">
 												<td>{{index + 1 }}</td>
-												<td>{{item.roomid}}</td>
-												<td>{{item.roomname}}</td>
-												<td>{{item.buildingid}}</td>
 												<td>{{item.ownerid}}</td>
-												<td>{{item.area}}</td>
-												<td>{{item.tenement}}</td>
-												<td>{{item.status}}</td>
+												<td>{{item.ownername}}</td>
+												<td>{{item.expenseall}}</td>
+												<td>{{item.expenseneed}}</td>
+												<td>{{item.expensetype}}</td>
+												<td>{{dateFormat(item.edate)}}</td>
+												
 												<td>
-													<button class="btn btn-primary btn-block text-white btn-user"
+		<!-- 											<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
-														@click="listshow = !listshow;updatejump(item.roomid);">更新</button>
+														@click="listshow = !listshow;updatejump(item.expenseid);">更新</button>
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="expensedelete(item.expenseid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -240,12 +248,11 @@
 															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
-																	<option value="roomname" selected="A">房间名</option>
-																	<option value="buildingid">楼宇号</option>
-																	<option value="ownerid">产权人号</option>
-																	<option value="tenement">住户</option>
-																	<option value="status">状态</option>
-																	<option value="area">面积</option>
+																	<option value="ownerid" selected="">产权人号</option>
+																	<option value="ownername" >产权人姓名</option>
+																	<option value="expenseid">账单号</option>
+																	<option value="expensetype">费用类型</option>
+																	<option value="edate">产生时间</option>
 																</select>&nbsp;</label>
 														</div>
 														<div class="col-md-3 text-nowrap">
@@ -263,7 +270,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="listshow = !listshow&roomupdate()">提交更新</button>
+																	@click="listshow = !listshow&expenseupdate()">提交更新</button>
 
 															</div>
 														</div>
@@ -282,32 +289,9 @@
 
 												<div class="dropdown" v-show="isupdateshow">
 													<hr>
-													<div class="row">
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间号"
-																	v-model="insertroomnumber">&nbsp;&nbsp;
-															</div>
-														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间名"
-																	v-model="insertroomname">&nbsp;&nbsp;
-															</div>
-														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="楼宇号"
-																	v-model="insertbuildingid">&nbsp;&nbsp;
-															</div>
-														</div>
-
+													<div class="row"> -->
+														
+<!-- 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
@@ -319,33 +303,47 @@
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="面积"
-																	v-model="insertarea">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="产权人姓名"
+																	v-model="insertownername">&nbsp;&nbsp;
 															</div>
 														</div>
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="住户"
-																	v-model="inserttenement">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="产生费用"
+																	v-model="insertexpenseall">&nbsp;&nbsp;
 															</div>
 														</div>
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="状态"
-																	v-model="insertstatus">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="应缴费用"
+																	v-model="insertexpenseneed">&nbsp;&nbsp;
 															</div>
 														</div>
+
+														<div class="col-md-1 text-nowrap">
+															<div class="dataTables_length" aria-controls="dataTable">
+																<input type="text" class="form-control form-control-sm"
+																	aria-controls="dataTable" placeholder="费用类型"
+																	v-model="insertexpensetype">&nbsp;&nbsp;
+															</div>
+														</div>
+
+														<input type = "date" class="form-control form-control-sm"
+																aria-controls="dataTable" style = "width: 200px;"
+																v-model="insertdate"> -->
+
 														
-														<div class="col-md-2 text-nowrap">
+														
+			<!-- 											<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
+																	@click="isupdateshow = !isupdateshow&expenseinsert()">提交插入</button>
 
 															</div>
 														</div>
@@ -357,7 +355,7 @@
 																	type="submit"
 																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
-														</div>
+														</div> -->
 
 													</div>
 												</div>
@@ -370,13 +368,12 @@
 							<tfoot>
 								<tr>
 									<th><strong>序号</strong></th>
-									<th><strong>房间号</strong></th>
-									<th><strong>房间名</strong></th>
-									<th><strong>楼宇号</strong></th>
 									<th><strong>产权人号</strong></th>
-									<th><strong>面积</strong></th>
-									<th><strong>住户</strong></th>
-									<th><strong>状态</strong></th>
+									<th><strong>产权人姓名</strong></th>
+									<th><strong>产生费用</strong></th>
+									<th><strong>应缴费用</strong></th>
+									<th><strong>费用类型</strong></th>
+									<th><strong>产生时间</strong></th>
 								</tr>
 							</tfoot>
 							</table>
@@ -435,132 +432,177 @@
 					changetype: "",
 					changedata: "",
 					isupdateshow: false,
-					insertroomnumber: "",
+					insertexpenseneed: "",
 					insertarea: "",
-					insertbuildingid: "",
+					insertedate: "",
 					insertownerid: "",
-					insertroomname: "",
+					insertownername: "",
 					insertstatus: "",
-					inserttenement: "",
-					deleteid: ""
+					startdate:"",
+					enddate:"",
+					insertexpenseall: "",
+					deleteid: "",
+					insertexpensetype: "",
+					insertdate:"",
 				},
 				methods: {
+					
+					dateFormat:function(time) {
+					    var date=new Date(time);
+					    var year=date.getFullYear();
+					    /* 在日期格式中，月份是从0开始的，因此要加0
+					     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+					     * */
+					    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+					    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
+					    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
+					    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
+					    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+					    // 拼接
+					    return year+"-"+month+"-"+day;
+					},
+
+					dateshowcontroll:function(){
+						if(this.searchtype =="edate"){
+							return true;
+						}else{
+							return false;
+						}
+					},
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					roominsert: function() {
-						console.log(this.insertroomid);
-						console.log(this.insertroomname);
-						console.log(this.insertbuildingid);
-						console.log(this.insertownerid);
-						console.log(this.insertarea);
-						console.log(this.inserttenement);
-						console.log(this.insertstatus);
-
-						/* let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
+					// expenseinsert: function() {
+					// 	let param = new URLSearchParams();
+					// 	param.append('ownerid', this.insertownerid);
+					// 	param.append('expenseall', this.insertexpenseall);
+					// 	param.append('expenseneed', this.insertexpenseneed);
+					// 	param.append('edate', this.insertedate);
 						
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
-							data: param
-						}).then((res) => {
-							console.log(res);
-							alert("插入成功");
-							location.reload();
-						}).catch((error) => {
-							console.log(error);
-						}); */
+					// 	axios({
+					// 		headers: {
+					// 			'content-type': 'application/x-www-form-urlencoded'
+					// 		},
+					// 		method: "post",
+					// 		url: "http://localhost:8888/simpleweb/Expenseinsertapi",
+					// 		data: param
+					// 	}).then((res) => {
+					// 		console.log(res);
+					// 		alert("插入成功");
+					// 		location.reload();
+					// 	}).catch((error) => {
+					// 		console.log(error);
+					// 	}); 
 
-					},
-					roomupdate: function() {
-						console.log(this.changetype);
-						console.log(this.changedata);
-						let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
-							data: param
-						}).then((res) => {
-							console.log(res);
-							alert("选中的值已经更改为" + this.changedata);
-							location.reload();
-						}).catch((error) => {
-							console.log(error);
-						});
+					// },
+					// expenseupdate: function() {
+					// 	console.log(this.changetype);
+					// 	console.log(this.changedata);
+					// 	let param = new URLSearchParams();
+					// 	param.append('pointer', this.tmptext);
+					// 	param.append('tabletype', "expense");
+					// 	param.append('updatetype', this.changetype);
+					// 	param.append('updatecontent', this.changedata);
+					// 	axios({
+					// 		headers: {
+					// 			'content-type': 'application/x-www-form-urlencoded'
+					// 		},
+					// 		method: "post",
+					// 		url: "http://localhost:8888/simpleweb/Fullupdateapi",
+					// 		data: param
+					// 	}).then((res) => {
+					// 		console.log(res);
+					// 		alert("选中的值已经更改为" + this.changedata);
+					// 		location.reload();
+					// 	}).catch((error) => {
+					// 		console.log(error);
+					// 	});
 
 
-					},
-					roomdelete: function(roomid) {
-						console.log(roomid);
-						this.deleteid = roomid;
-						let param = new URLSearchParams();
-						param.append('tabletype', "room");
-						param.append('identifier', this.deleteid);
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fulldeleteapi",
-							data: param
-						}).then((res) => {
-							console.log(res.data);
-							if (res.data.Res = true) {
-								alert("删除成功！");
-								location.reload();
-							} else {
+					// },
+					// expensedelete: function(expenseid) {
+					// 	console.log(expenseid);
+					// 	this.deleteid = expenseid;
+					// 	let param = new URLSearchParams();
+					// 	param.append('tabletype', "expense");
+					// 	param.append('identifier', this.deleteid);
+					// 	axios({
+					// 		headers: {
+					// 			'content-type': 'application/x-www-form-urlencoded'
+					// 		},
+					// 		method: "post",
+					// 		url: "http://localhost:8888/simpleweb/Fulldeleteapi",
+					// 		data: param
+					// 	}).then((res) => {
+					// 		console.log(res.data);
+					// 		if (res.data.Res = true) {
+					// 			alert("删除成功！");
+					// 			location.reload();
+					// 		} else {
 
-							}
+					// 		}
 
-						}).catch((error) => {
-							console.log(error);
-						});
-					},
-					updatejump: function(roomid) {
-						this.tmptext = roomid;
-						console.log(this.tmptext);
-					},
-					roomquery: function() {
-						console.log(this.searchtype);
-						console.log(this.searchcontent);
-						let param = new URLSearchParams();
-						param.append('tabletype', "room");
-						param.append('querytype', this.searchtype);
-						param.append('querycontent', this.searchcontent);
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullquerynewapi",
-							data: param
-						}).then((res) => {
-							console.log(res.data);
-							if (res.data.length > 0) {
-								this.list = res.data;
-								this.isshow = false;
-							} else {
-								this.list = [];
-								this.isshow = true;
-							}
+					// 	}).catch((error) => {
+					// 		console.log(error);
+					// 	});
+					// },
+					// updatejump: function(expenseid) {
+					// 	this.tmptext = expenseid;
+					// 	console.log(this.tmptext);
+					// },
+					expensequery: function() {
+						if(this.searchtype != "edate"){
+							let param = new URLSearchParams();
+							param.append('tabletype', "expense inner join owner using (ownerid)");
+							param.append('querytype', this.searchtype);
+							param.append('querycontent', this.searchcontent);
+							console.log(this.searchtype);
+							console.log(this.searchcontent);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/Fullquerynewapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
 
-						}).catch((error) => {
-							console.log(error);
-						});
+							}).catch((error) => {
+								console.log(error);
+							});
+						}else{
+							let param = new URLSearchParams();
+							param.append('date1', this.startdate);
+							param.append('date2', this.enddate);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/Datequeryapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
+							
+							}).catch((error) => {
+								console.log(error);
+							});
+						}
 					},
 				}
 			});

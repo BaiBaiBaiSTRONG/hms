@@ -169,7 +169,7 @@ public class FunctionsforProgramme {
 
         List<Entity> list =null;
         try {
-            list=Db.use().query("select expenseid,expenseall,expenseneed,ownerid,expensetype,edate from expense where edate between ? and ?",simpleDateFormat.parse(date1),simpleDateFormat.parse(date2));
+            list=Db.use().query("select expenseid,expenseall,expenseneed,ownerid,ownername,expensetype,edate from expense inner join owner using (ownerid) where edate between ? and ?",simpleDateFormat.parse(date1),simpleDateFormat.parse(date2));
         } catch (SQLException | ParseException throwables) {
             throwables.printStackTrace();
         }
@@ -180,7 +180,7 @@ public class FunctionsforProgramme {
         List<Entity> list =null;
 
         try {
-            list=Db.use().query("select ownerid, ownername, sum(expenseneed) as sumneed, sum(expenseall) as sumall from expense inner join owner using (ownerid)");
+            list=Db.use().query("select ownerid, ownername, sum(expenseneed) as sumneed, sum(expenseall) as sumall from expense inner join owner using (ownerid) group by ownerid, ownername");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
