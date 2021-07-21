@@ -74,23 +74,10 @@ public class FunctionsforProgramme {
         }
         return 0;
     }
-<<<<<<< HEAD
-    public int feesum(String ownerid){return 0;};
-    public List<Entity> expensequery(String querytype,String querycontent){List<Entity> list=null;return list;};
-    public List<Entity> expensebyperiod(Date date1,Date date2){List<Entity> list=null;return list;};
-    public int updateexpense(Expense expense,String updatetype,String updatecontent){return 0;};
-    public List<Entity> officequery(String querytype,String querycontent){List<Entity> list=null;return list;};
-    public int officeupdate(String officeid,String updatetype,String updatecontent ){return 0;}
-    public int parkingupdate(String Parkingid,String updatetype,String updatecontent){return 0;};
-    public int ownerinsert(String ownerid,String ownername,String age,String status) throws ParseException {
-        try {
-            int var=Db.use().execute("insert into expense values(?,?,?,?)",Integer.parseInt(ownerid),ownername,Integer.parseInt(age),Integer.parseInt(status));
-=======
 
     public int ownerinsert(String ownerid, String ownername, String age, String status) throws ParseException {
         try {
             int var = Db.use().execute("insert into expense values(?,?,?,?)", Integer.parseInt(ownerid), ownername, Integer.parseInt(age), Integer.parseInt(status));
->>>>>>> 1a4ddbc68a1966d00ae46811fb9dc418e2392c1b
             return var;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -185,29 +172,17 @@ public class FunctionsforProgramme {
         }
         return list;
     }
-<<<<<<< HEAD
-    public List<Entity>  expensegroupby()
-    {
-        List<Entity> list =null;
-        try {
-            list=Db.use().query("select ownerid, ownername, sum(expenseneed), sum(expenseall) from expense natural join owner group by ownerid");
-=======
 
     public List<Entity> expensegroupby() {
         List<Entity> list = null;
         try {
-            list = Db.use().query("select ownerid, ownername, sum(expenseneed), sum(expenseall) from expense natural join owner group by ownerid");
->>>>>>> 1a4ddbc68a1966d00ae46811fb9dc418e2392c1b
+            list = Db.use().query("select ownerid, ownername, sum(expenseneed) as sumneed, sum(expenseall) as sumall from expense inner join owner using (ownerid) group by ownerid, ownername");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return list;
 
     }
-<<<<<<< HEAD
-    public List<Entity> Fullqueryv2(String selection,String tabletype,String querytype,String querycontent) throws SQLException
-    {
-=======
 
     public List<Entity> Fullqueryv2(String selection, String tabletype, String querytype, String querycontent) throws SQLException {
         List<Entity> list = null;
@@ -273,7 +248,6 @@ public class FunctionsforProgramme {
     }
 
     public List<Entity> findAllUser() {
->>>>>>> 1a4ddbc68a1966d00ae46811fb9dc418e2392c1b
         List<Entity> list = null;
         try {
             list = Db.use().query("select * from room");
@@ -283,61 +257,6 @@ public class FunctionsforProgramme {
         return list;
     }
 
-<<<<<<< HEAD
-    public int securityinsert(String securityid,String securityname,String score,String issue,String checkstatus,String staffid,String sdate) throws ParseException {
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            int var=Db.use().execute("insert into security values(?,?,?,?,?,?,?)",Integer.parseInt(securityid),securityname,Integer.parseInt(score),Integer.parseInt(issue),Integer.parseInt(checkstatus),Integer.parseInt(staffid),simpleDateFormat.parse(sdate));
-            return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return 0;
-    }
-
-    public int issueinsert(String issueid,String issuename,String securityid,String content) throws ParseException {
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            int var=Db.use().execute("insert into issue values(?,?,?,?)",Integer.parseInt(issueid),issuename,Integer.parseInt(securityid),content);
-            return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return 0;
-    }
-
-    public int officeinsert(String officeid,String filesnum,String keysnum,String status) throws ParseException {
-        try {
-            int var=Db.use().execute("insert into office values(?,?,?,?)",Integer.parseInt(officeid),Integer.parseInt(filesnum),Integer.parseInt(keysnum),status);
-            return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return 0;
-    }
-
-    public int cleaninginsert(String cleaningid,String cleaningname,String cleaningtime,String cleaningstatus,String cdate,String staffid
-
-    ) throws ParseException { SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            int var=Db.use().execute("insert into cleaning values(?,?,?,?,?,?)",Integer.parseInt(cleaningid),cleaningname,simpleDateFormat.parse(cleaningtime),Integer.parseInt(cleaningstatus),simpleDateFormat.parse(cdate),Integer.parseInt(staffid));
-            return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return 0;
-    }
-    public int requestinsert(String requestid,String requestcontent,String requesttype,String requestsatatus,String staffid,String ownerid
-
-    ) throws ParseException {
-        try {
-            int var=Db.use().execute("insert into cleaning values(?,?,?,?,?,?)",Integer.parseInt(requestid),requestcontent,requesttype,requestsatatus,staffid,Integer.parseInt(ownerid));
-            return var;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return 0;
-=======
     public List<Entity> findAll(int startIndex, int pageSize) {
         List<Entity> listall = new ArrayList<>();
         List<Entity> listneed = new ArrayList<>();
@@ -347,7 +266,6 @@ public class FunctionsforProgramme {
             listneed.add(listall.get(startIndex + a));
         }
         return listneed;
->>>>>>> 1a4ddbc68a1966d00ae46811fb9dc418e2392c1b
     }
 }
 

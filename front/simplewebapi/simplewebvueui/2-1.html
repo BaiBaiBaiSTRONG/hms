@@ -299,8 +299,8 @@
 																
 																     v-model="changexpense">
 																
-																	<option value="0" >新增</option>
-																	<option value="1">缴费</option>
+																	<option value="+">新增</option>
+																	<option value="-">缴费</option>
 																	
 																	
 																</select>&nbsp;</label>
@@ -462,22 +462,23 @@
 						console.log(this.buildingid);
 					},
 					expenseinsert: function() {
+						console.log(this.changexpense)
 					
-					
-
 						let param = new URLSearchParams();
 						param.append('expenseid', this.insertexpenseid);
-						if (this.changexpense="0") {
+						if (this.changexpense=="+") {
 							param.append('expenseall', this.insertexpense);
+							console.log(this.insertexpense);
 							param.append('expenseneed', this.insertexpense);
 							
 						} else{
 							param.append('expenseall', "0");
-							this.insertexpense = "-"+ this.insertexpense;
+							this.insertexpense = this.changexpense + this.insertexpense;
+							console.log(this.insertexpense);
 							param.append('expenseneed', this.insertexpense );
 							
 						}
-						console.log(this,this.insertexpense);
+						console.log(this.insertexpense);
 						param.append('ownerid', this.insertownerid);
 						param.append('expensetype', this.insertexpensetype);
 						param.append('edate', this.insertdate);
