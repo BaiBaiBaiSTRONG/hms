@@ -98,24 +98,24 @@
 					<div class="container-fluid">
 						<div class="card shadow">
 							<br>
-							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
+							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;办公管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
-										type="button" style="color: white;"
-										onClick="location.href='1-1.html'">房产信息</button>
+										type="button" style="color: #f9f9f9;background-color: #8b8b8b;"
+										onClick="location.href='1-1.html'">基础信息</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
-										onClick="location.href='1-2.html'">楼宇管理</button>
+										onClick="location.href='1-2.html'">日常管理</button>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-									<button class="btn btn-primary" style="color: #f9f9f9;background-color: #8b8b8b;"
-										onClick="location.href='1-3.html'">业务管理</button>
+									<button class="btn btn-primary"style="color: white;"
+										onClick="location.href='1-3.html'">服务管理</button>
 								</div>
 
 							</div>
@@ -157,10 +157,10 @@
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
-													<option value="roomname" selected="">房间名</option>
-													<option value="ownerid">产权人号</option>
-													<option value="buildingid">楼宇号</option>
-													<option value="tenement">住户</option>
+													<option value="officeid" selected="">办公室号</option>
+													<option value="filesnum">文件数量</option>
+													<option value="keysnum">钥匙数量</option>
+													
 													<option value="status">状态</option>
 												</select>&nbsp;</label>
 
@@ -184,7 +184,7 @@
 
 									<div class="col-md-1 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="roomquery()">查询</button>
+											@click="officequery()">查询</button>
 
 									</div>
 
@@ -202,12 +202,9 @@
 										<thead>
 											<tr>
 												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
+												<th><strong>办公室号</strong></th>
+												<th><strong>文件数量</strong></th>
+												<th><strong>钥匙数量</strong></th>
 												<th><strong>状态</strong></th>
 											</tr>
 										</thead>
@@ -216,21 +213,19 @@
 
 											<tr v-for="(item, index) in list">
 												<td>{{index + 1 }}</td>
-												<td>{{item.roomid}}</td>
-												<td>{{item.roomname}}</td>
-												<td>{{item.buildingid}}</td>
-												<td>{{item.ownerid}}</td>
-												<td>{{item.area}}</td>
-												<td>{{item.tenement}}</td>
+												<td>{{item.officeid}}</td>
+												<td>{{item.filesnum}}</td>
+												<td>{{item.keysnum}}</td>
+												
 												<td>{{item.status}}</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
-														@click="listshow = !listshow;updatejump(item.roomid);">更新</button>
+														@click="listshow = !listshow;updatejump(item.officeid);">更新</button>
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="officedelete(item.officeid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -240,12 +235,11 @@
 															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
-																	<option value="roomname" selected="A">房间名</option>
-																	<option value="buildingid">楼宇号</option>
-																	<option value="ownerid">产权人号</option>
-																	<option value="tenement">住户</option>
+																	<option value="officeid" selected="">办公室号</option>
+																	<option value="filesnum">文件数量</option>
+																	<option value="keysnum">钥匙数量</option>
+																	
 																	<option value="status">状态</option>
-																	<option value="area">面积</option>
 																</select>&nbsp;</label>
 														</div>
 														<div class="col-md-3 text-nowrap">
@@ -263,7 +257,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="listshow = !listshow&roomupdate()">提交更新</button>
+																	@click="listshow = !listshow&officeupdate()">提交更新</button>
 
 															</div>
 														</div>
@@ -287,50 +281,28 @@
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间号"
-																	v-model="insertroomnumber">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="办公室号"
+																	v-model="insertofficenumber">&nbsp;&nbsp;
 															</div>
 														</div>
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间名"
-																	v-model="insertroomname">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="文件数量"
+																	v-model="insertfilesnumber">&nbsp;&nbsp;
 															</div>
 														</div>
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="楼宇号"
-																	v-model="insertbuildingid">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="钥匙数量"
+																	v-model="insertkeynumber">&nbsp;&nbsp;
 															</div>
 														</div>
 
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="产权人号"
-																	v-model="insertownerid">&nbsp;&nbsp;
-															</div>
-														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="面积"
-																	v-model="insertarea">&nbsp;&nbsp;
-															</div>
-														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="住户"
-																	v-model="inserttenement">&nbsp;&nbsp;
-															</div>
-														</div>
+					
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
@@ -345,7 +317,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
+																	@click="isupdateshow = !isupdateshow&officeinsert()">提交插入</button>
 
 															</div>
 														</div>
@@ -370,12 +342,9 @@
 							<tfoot>
 								<tr>
 									<th><strong>序号</strong></th>
-									<th><strong>房间号</strong></th>
-									<th><strong>房间名</strong></th>
-									<th><strong>楼宇号</strong></th>
-									<th><strong>产权人号</strong></th>
-									<th><strong>面积</strong></th>
-									<th><strong>住户</strong></th>
+									<th><strong>办公室号</strong></th>
+									<th><strong>文件数量</strong></th>
+									<th><strong>钥匙数量</strong></th>
 									<th><strong>状态</strong></th>
 								</tr>
 							</tfoot>
@@ -435,40 +404,33 @@
 					changetype: "",
 					changedata: "",
 					isupdateshow: false,
-					insertroomnumber: "",
-					insertarea: "",
+					insertofficenumber: "",
+					insertkeynumber: "",
 					insertbuildingid: "",
 					insertownerid: "",
-					insertroomname: "",
 					insertstatus: "",
-					inserttenement: "",
+					insertfilesnumber: "",
 					deleteid: ""
 				},
 				methods: {
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					roominsert: function() {
-						console.log(this.insertroomid);
-						console.log(this.insertroomname);
-						console.log(this.insertbuildingid);
-						console.log(this.insertownerid);
-						console.log(this.insertarea);
-						console.log(this.inserttenement);
-						console.log(this.insertstatus);
+					officeinsert: function() {
+					
 
-						/* let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
+						let param = new URLSearchParams();
+						param.append('officeid', this.insertofficenumber);
+						param.append('keysnum', this.insertkeynumber);
+						param.append('filesnum', this.insertfilesnumber);
+						param.append('status', this.insertstatus);
 						
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
+							url: "http://localhost:8888/simpleweb/Officeinsertapi",
 							data: param
 						}).then((res) => {
 							console.log(res);
@@ -476,15 +438,15 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); */
+						}); 
 
 					},
-					roomupdate: function() {
+					officeupdate: function() {
 						console.log(this.changetype);
 						console.log(this.changedata);
 						let param = new URLSearchParams();
 						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
+						param.append('tabletype', "office");
 						param.append('updatetype', this.changetype);
 						param.append('updatecontent', this.changedata);
 						axios({
@@ -504,11 +466,11 @@
 
 
 					},
-					roomdelete: function(roomid) {
-						console.log(roomid);
-						this.deleteid = roomid;
+					officedelete: function(officeid) {
+						console.log(officeid);
+						this.deleteid = officeid;
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "office");
 						param.append('identifier', this.deleteid);
 						axios({
 							headers: {
@@ -530,15 +492,15 @@
 							console.log(error);
 						});
 					},
-					updatejump: function(roomid) {
-						this.tmptext = roomid;
+					updatejump: function(officeid) {
+						this.tmptext = officeid;
 						console.log(this.tmptext);
 					},
-					roomquery: function() {
+					officequery: function() {
 						console.log(this.searchtype);
 						console.log(this.searchcontent);
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "office");
 						param.append('querytype', this.searchtype);
 						param.append('querycontent', this.searchcontent);
 						axios({
