@@ -3,6 +3,7 @@ package com.max.slw.api;
 import cn.hutool.json.JSONUtil;
 import com.max.slw.dao.FunctionsforProgramme;
 import com.max.slw.dao.Room;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,8 @@ public class Expenseinsertapi extends HttpServlet {
         String ownerid=req.getParameter("ownerid");
         String expensetype=req.getParameter("expensetype");
         String edate=req.getParameter("edate");
+
+
         FunctionsforProgramme way=new FunctionsforProgramme();
         int result = 0;
         try {
