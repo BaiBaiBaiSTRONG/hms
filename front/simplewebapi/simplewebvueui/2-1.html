@@ -477,9 +477,11 @@
 							param.append('expenseneed', this.insertexpense );
 							
 						}
+						console.log(this,this.insertexpense);
 						param.append('ownerid', this.insertownerid);
 						param.append('expensetype', this.insertexpensetype);
 						param.append('edate', this.insertdate);
+						
 						
 						
 						axios({
