@@ -97,12 +97,23 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
 							<div class="row">
-								<div class="col-md-5 text-nowrap"></div>
+								<div class="col-md-1 text-nowrap"></div>
+								<div class="col-md-3 text-nowrap">
+									<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+										<label>Show&nbsp;<select
+												class="form-control form-control-sm custom-select custom-select-sm"
+												v-model="shownum">
+												<option value="5" selected="">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+											</select>&nbsp;</label>
+									</div>
+								</div>
+								<div class="col-md-1 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
 										type="button" style="color: white;"
@@ -178,7 +189,7 @@
 										</div>
 									</div>
 
-									<div class="col-md-2 text-nowrap"></div>
+									<div class="col-md-3 text-nowrap"></div>
 
 
 									<div class="col-md-1 text-nowrap">
@@ -187,11 +198,11 @@
 
 									</div>
 
-									<div class="col-md-1 text-nowrap" style="align-items: center;">
+									<!-- <div class="col-md-1 text-nowrap" style="align-items: center;">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 											@click="isupdateshow =!isupdateshow">插入</button>
 
-									</div>
+									</div> -->
 
 								</div>
 								<div class="table-responsive table mt-2" id="dataTable" role="grid"
@@ -237,7 +248,7 @@
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
 																	<option value="buildingname" selected="A">楼宇名</option>
-																	<option value="buliding.buildingid">楼宇号</option>
+																	<!-- <option value="buliding.buildingid">楼宇号</option> -->
 																	<option value="loc">位置</option>
 																	
 																	<option value="building.status">状态</option>
@@ -292,7 +303,7 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="楼宇名"
-																	v-model="insertbuildingid">&nbsp;&nbsp;
+																	v-model="insertbuildingname">&nbsp;&nbsp;
 															</div>
 														</div>
 
@@ -361,16 +372,9 @@
 							</div>
 							<div class="col-md-6">
 								<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-
-									<!-- <ul class="pagination">
-												<li class="page-item disabled"><a class="page-link" href="#"
-														aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-												<li class="page-item active"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#"
-														aria-label="Next"><span aria-hidden="true">»</span></a></li>
-											</ul> -->
+									<ul class="pagination">
+										<li class="page-item"><a class="page-link" @click="">1</a></li>
+									</ul>
 									<!-- 此部分为处理分页跳转 暂不实现-->
 								</nav>
 							</div>
@@ -420,31 +424,30 @@
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					buildinginsert: function() {
-
-
-						/* let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
-						
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
-							data: param
-						}).then((res) => {
-							console.log(res);
-							alert("插入成功");
-							location.reload();
-						}).catch((error) => {
-							console.log(error);
-						}); */
-
-					},
+				buildinginsert: function() {
+					
+					let param = new URLSearchParams();
+					param.append('buildingid', this.insertbuildingid);
+					param.append('buildingname', this.insertbuildingname);
+					param.append('loc', this.insertloc);
+					param.append('status', this.insertstatus);
+					
+					axios({
+						headers: {
+							'content-type': 'application/x-www-form-urlencoded'
+						},
+						method: "post",
+						url: "http://localhost:8888/simpleweb/BuildinginsertApi",
+						data: param
+					}).then((res) => {
+						console.log(res);
+						alert("插入成功");
+						location.reload();
+					}).catch((error) => {
+						console.log(error);
+					}); 
+				
+				},
 					buildingupdate: function() {
 						console.log(this.changetype);
 						console.log(this.changedata);
@@ -471,6 +474,7 @@
 
 					},
 					buildingdelete: function(buildingid) {
+						alert("确定要删除吗？")
 						console.log(buildingid);
 						this.deleteid = buildingid;
 						let param = new URLSearchParams();

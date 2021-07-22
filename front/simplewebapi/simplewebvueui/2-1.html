@@ -97,21 +97,21 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;收费管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
-									<button class="btn btn-primary" type="button"
-										type="button" style="color: #f9f9f9;background-color: #8b8b8b;"
+									<button class="btn btn-primary" type="button" type="button"
+										style="color: #f9f9f9;background-color: #8b8b8b;"
 										onClick="location.href='2-1.html'">收费记录</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
 										onClick="location.href='2-2.html'">收费报表</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 									<button class="btn btn-primary" style="color: white;"
@@ -140,18 +140,12 @@
 													aria-controls="dataTable" placeholder="Search"></label></div>
 									 -->
 									<!-- 简易搜索 暂不实现 -->
-									<div class="col-md-3 text-nowrap">
-										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
-											<label style="font-size: 15px;">小区：&nbsp;<select
-													class="form-control form-control-sm custom-select custom-select-sm">
-													<option value="mo" selected="">大连理工大学开发区校区</option>
-													<option value="25">25</option>
 
-												</select>&nbsp;</label>
-										</div>
+
+									<div class="col-md- text-nowrap">
 									</div>
-									<div class="col-md-3 text-nowrap">
-										
+									<div class="col-md-2 text-nowrap">
+
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
@@ -161,25 +155,39 @@
 													<option value="ownerid">产权人号</option>
 													<option value="expensetype">费用类型</option>
 													<option value="edate">产生时间</option>
-													
+
 												</select>&nbsp;</label>
 
 										</div>
 									</div>
 
-
-
 									<div class="col-md-2 text-nowrap">
+									</div>
+
+
+									<div class="col-mt-4 text-nowrap">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="查询依据"
-													v-model="searchcontent">
+													aria-controls="dataTable" placeholder="查询依据" v-model="searchcontent"
+													v-show="!dateshowcontroll()">
 											</label>
 										</div>
 									</div>
 
-									<div class="col-md-2 text-nowrap"></div>
+									<div class="col-md-1 text-nowrap" v-show="!dateshowcontroll()">
+									</div>
+
+									<input type="date" class="form-control form-control-sm" aria-controls="dataTable"
+										style="width: 200px;" v-model="startdate" v-show="dateshowcontroll()">&nbsp;
+
+									<div class="col-md-1 text-nowrap" v-show="!dateshowcontroll()">
+									</div>
+									<input type="date" class="form-control form-control-sm" aria-controls="dataTable"
+										style="width: 200px;" v-model="enddate" v-show="dateshowcontroll()">
+
+									<div class="col-md-2 text-nowrap" v-show="!dateshowcontroll()"></div>
+									<div class="col-md-1 text-nowrap" v-show="dateshowcontroll()"></div>
 
 
 									<div class="col-md-1 text-nowrap">
@@ -208,7 +216,7 @@
 												<th><strong>产权人号</strong></th>
 												<th><strong>费用类型</strong></th>
 												<th><strong>产生时间</strong></th>
-												
+
 											</tr>
 										</thead>
 										<tbody>
@@ -230,7 +238,8 @@
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="expensedelete(item.expenseid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="expensedelete(item.expenseid)"
+														style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -240,12 +249,13 @@
 															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
-																	<option value="expenseall" selected="A">产生费用</option>
+																	<option value="expenseall" selected="A">产生费用
+																	</option>
 																	<option value="expenseneed">应缴费用</option>
-																	<option value="ownerid">产权人号</option>
+																	
 																	<option value="expencetype">费用类型</option>
 																	<option value="edate">产生时间</option>
-																	
+
 																</select>&nbsp;</label>
 														</div>
 														<div class="col-md-3 text-nowrap">
@@ -255,9 +265,9 @@
 																	v-model="changedata">&nbsp;&nbsp;
 															</div>
 														</div>
-														
+
 														<div class="col-md-3 text-nowrap"></div>
-														
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
@@ -272,8 +282,8 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="listshow = !listshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 
 														</div>
@@ -291,23 +301,22 @@
 																	v-model="insertexpenseid">&nbsp;&nbsp;
 															</div>
 														</div>
-														
+
 
 														<div class="col-md-1 text-nowrap">
 															<label style="font-size: 15px;"><select
 																	class="form-control form-control-sm custom-select custom-select-sm"
-																
-																     v-model="changexpense">
-																
-																	<option value="+">新增</option>
-																	<option value="-">缴费</option>
-																	
-																	
+																	v-model="changexpense">
+
+																	<option value="0">新增</option>
+																	<option value="1">缴费</option>
+
+
 																</select>&nbsp;</label>
-															
+
 														</div>
-														
-														
+
+
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
@@ -333,38 +342,38 @@
 															</div>
 														</div>
 
-													<!-- 	<div class="col-md-1 text-nowrap">
+														<!-- 	<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="产生时间"
 																	v-model="insertedate">&nbsp;&nbsp;
 															</div>
 														</div> -->
-														
-															<input type = "date" class="form-control form-control-sm"
-																	aria-controls="dataTable" style = "width: 200px;"
-																	v-model="insertdate">
-														
-														
-														
-														
+
+														<input type="date" class="form-control form-control-sm"
+															aria-controls="dataTable" style="width: 200px;"
+															v-model="insertdate">
+
+
+
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
 																	@click="listshow = !listshow&expenseinsert()">提交插入</button>
-														
+
 															</div>
 														</div>
-						                                
+
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="isupdateshow = !isupdateshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 														</div>
 
@@ -455,55 +464,57 @@
 					insertstatus: "",
 					inserttenement: "",
 					insertexpense: "",
-					deleteid: ""
+					deleteid: "",
+					startdate: "",
+					enddate: "",
 				},
 				methods: {
-					
-					dateFormat:function(time) {
-					    var date=new Date(time);
-					    var year=date.getFullYear();
-					    /* 在日期格式中，月份是从0开始的，因此要加0
-					     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-					     * */
-					    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-					    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-					    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-					    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-					    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
-					    // 拼接
-					    return year+"-"+month+"-"+day;
+					dateshowcontroll: function() {
+						if (this.searchtype == "edate") {
+							return true;
+						} else {
+							return false;
+						}
+					},
+
+					dateFormat: function(time) {
+						var date = new Date(time);
+						var year = date.getFullYear();
+						/* 在日期格式中，月份是从0开始的，因此要加0
+						 * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+						 * */
+						var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+						var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+						var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+						var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+						var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+						// 拼接
+						return year + "-" + month + "-" + day;
 					},
 					testlog: function() {
 						console.log(this.buildingid);
 					},
 					expenseinsert: function() {
-						console.log(this.changexpense)
-					
+
+
+
 						let param = new URLSearchParams();
 						param.append('expenseid', this.insertexpenseid);
-<<<<<<< HEAD
-						if (this.changexpense=="+") {
-=======
-						if (this.changexpense=="0") {
->>>>>>> e4a2e79eac29aaf25dc67bc81b3ae0ded3b408bb
+						if (this.changexpense == "0") {
 							param.append('expenseall', this.insertexpense);
-							console.log(this.insertexpense);
 							param.append('expenseneed', this.insertexpense);
-							
-						} else{
+
+						} else {
 							param.append('expenseall', "0");
-							this.insertexpense = this.changexpense + this.insertexpense;
-							console.log(this.insertexpense);
-							param.append('expenseneed', this.insertexpense );
-							
+							this.insertexpense = "-" + this.insertexpense;
+							param.append('expenseneed', this.insertexpense);
+
 						}
-						console.log(this.insertexpense);
 						param.append('ownerid', this.insertownerid);
 						param.append('expensetype', this.insertexpensetype);
 						param.append('edate', this.insertdate);
-						
-						
-						
+
+
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
@@ -517,7 +528,7 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); 
+						});
 
 					},
 					expenseupdate: function() {
@@ -576,38 +587,64 @@
 						console.log(this.tmptext);
 					},
 					expensequery: function() {
-						console.log(this.searchtype);
-						console.log(this.searchcontent);
-						let param = new URLSearchParams();
-						param.append('tabletype', "expense");
-						param.append('querytype', this.searchtype);
-						param.append('querycontent', this.searchcontent);
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullquerynewapi",
-							data: param
-						}).then((res) => {
-							console.log(res.data);
-							if (res.data.length > 0) {
-								this.list = res.data;
-								this.isshow = false;
-							} else {
-								this.list = [];
-								this.isshow = true;
-							}
+						if (this.searchtype != "edate") {
+							let param = new URLSearchParams();
+							param.append('tabletype', "expense inner join owner using (ownerid)");
+							param.append('querytype', this.searchtype);
+							param.append('querycontent', this.searchcontent);
+							console.log(this.searchtype);
+							console.log(this.searchcontent);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/Fullquerynewapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
 
-						}).catch((error) => {
-							console.log(error);
-						});
+							}).catch((error) => {
+								console.log(error);
+							});
+						} else {
+							let param = new URLSearchParams();
+							param.append('date1', this.startdate);
+							param.append('date2', this.enddate);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/Datequeryapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
+
+							}).catch((error) => {
+								console.log(error);
+							});
+						}
 					},
 				}
 			});
 		</script>
 		<script src="assets/js/jquery.min.js"></script>
-				<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 
 </html>

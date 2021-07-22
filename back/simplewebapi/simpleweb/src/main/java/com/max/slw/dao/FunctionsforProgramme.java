@@ -193,6 +193,12 @@ public class FunctionsforProgramme {
         list = Db.use().query("select "+selection+" from "+tabletype+" where "+querytype +"=?",querycontent);
         return list;
     }
+     public List<Entity> Fullquery2(String tabletype,String querytype1,String querytype2,String querycontent1,String querycontent2) throws SQLException
+    {
+        List<Entity> list = null;
+        list = Db.use().query("select * from "+tabletype+" where ("+querytype1 +"=?"+")and("+querytype2+"=?)",querycontent1,querycontent2);
+        return list;
+    }
 
     public int securityinsert(String securityid,String securityname,String score,String issue,String checkstatus,String staffid,String sdate) throws ParseException {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");

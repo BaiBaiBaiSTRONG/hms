@@ -96,22 +96,34 @@
 					<!-- 结束上边栏 开始处理下端表格部分 -->
 
 					<div class="container-fluid">
-						<div class="card shadow">
-							<br>
+						<div class="card shadow" id="app">
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
 							<div class="row">
-								<div class="col-md-5 text-nowrap"></div>
+								<div class="col-md-1 text-nowrap"></div>
+								<div class="col-md-3 text-nowrap">
+									<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+										<label>Show&nbsp;<select
+												class="form-control form-control-sm custom-select custom-select-sm"
+												v-model="shownum">
+												<option value="5" selected="">4</option>
+												<option value="6">3</option>
+
+											</select>&nbsp;</label>
+									</div>
+								</div>
+								<div class="col-md-1 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
 										style="color: #f9f9f9;background-color: #8b8b8b;"
 										onClick="location.href='1-1.html'">房产信息</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
 										onClick="location.href='1-2.html'">楼宇管理</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 									<button class="btn btn-primary" type="button" style="color: white;"
@@ -120,25 +132,8 @@
 
 							</div>
 
-							<div class="card-body" id="app">
+							<div class="card-body">
 								<div class="row">
-									<!--
-										<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-											<label>Show&nbsp;<select
-													class="form-control form-control-sm custom-select custom-select-sm">
-													<option value="10" selected="">10</option>
-													<option value="25">25</option>
-													<option value="50">50</option>
-													<option value="100">100</option>
-												</select>&nbsp;</label>
-										</div> 
-									</div> -->
-									<!-- 每页显示数量部分 暂不实现-->
-									<!-- <div class="col-md-6">
-										<div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input
-													type="search" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="Search"></label></div>
-									 -->
 									<!-- 简易搜索 暂不实现 -->
 									<div class="col-md-3 text-nowrap">
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
@@ -151,13 +146,14 @@
 										</div>
 									</div>
 									<div class="col-md-3 text-nowrap">
-										
+
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
-													<option value="roomname" selected="">房间名</option>
+													<option value="all" selected="">全部</option>
+													<option value="roomname">房间名</option>
 													<option value="ownerid">产权人号</option>
 													<option value="buildingid">楼宇号</option>
 													<option value="tenement">住户</option>
@@ -230,7 +226,8 @@
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="roomdelete(item.roomid)"
+														style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -255,9 +252,9 @@
 																	v-model="changedata">&nbsp;&nbsp;
 															</div>
 														</div>
-														
+
 														<div class="col-md-3 text-nowrap"></div>
-														
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
@@ -272,8 +269,8 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="listshow = !listshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 
 														</div>
@@ -339,7 +336,7 @@
 																	v-model="insertstatus">&nbsp;&nbsp;
 															</div>
 														</div>
-														
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
@@ -354,8 +351,8 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="isupdateshow = !isupdateshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 														</div>
 
@@ -387,18 +384,17 @@
 								<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
 								</p>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" v-show="isshown">
 								<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
 
 									<ul class="pagination">
-												<li class="page-item disabled"><a class="page-link" href="#"
-														aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-												<li class="page-item active"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-														
-									</ul> 
+
+										<li class="page-item"><a class="page-link" @click="testlog(1)">1</a></li>
+										<li class="page-item"><a class="page-link" @click="testlog(2)">2</a></li>
+										<li class="page-item"><a class="page-link" @click="testlog(3)">3</a></li>
+
+
+									</ul>
 									<!-- 此部分为处理分页跳转 暂不实现-->
 								</nav>
 							</div>
@@ -443,11 +439,46 @@
 					insertstatus: "",
 					inserttenement: "",
 					deleteid: "",
-					insertroomid:""
+					insertroomid: "",
+					shownum: "",
+					isshown: false
 				},
 				methods: {
-					testlog: function() {
-						console.log(this.buildingid);
+					isshow: function() {
+						if (this.searchtype == "all") {
+							return true;
+						}
+						return false
+					},
+					testlog: function(pagenum) {
+
+						let param = new URLSearchParams();
+						param.append('pageNum1', pagenum);
+						param.append('pageSize1', this.shownum);
+						console.log(this.searchtype);
+						console.log(this.shownum);
+						console.log(this.shownum)
+						axios({
+							headers: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							method: "post",
+							url: "http://localhost:8888/simpleweb/PageBeanapi",
+							data: param
+						}).then((res) => {
+							console.log(res.data);
+							if (res.data.length > 0) {
+								this.list = res.data;
+								this.isshow = false;
+							} else {
+								this.list = [];
+								this.isshow = true;
+							}
+
+						}).catch((error) => {
+							console.log(error);
+						});
+
 					},
 					roominsert: function() {
 						let param = new URLSearchParams();
@@ -459,13 +490,13 @@
 						console.log(this.inserttenement);
 						console.log(this.insertstatus);
 						param.append('roomid', this.insertroomid);
-						param.append('roomname',this.insertroomname);
+						param.append('roomname', this.insertroomname);
 						param.append('buildingid', this.insertbuildingid);
 						param.append('ownerid', this.insertownerid);
 						param.append('area', this.insertarea);
 						param.append('tenement', this.inserttenement);
 						param.append('status', this.insertstatus);
-						
+
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
@@ -479,11 +510,11 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); 
-						
+						});
+
 
 					},
-					
+
 					roomupdate: function() {
 						console.log(this.changetype);
 						console.log(this.changedata);
@@ -507,7 +538,7 @@
 							console.log(error);
 						});
 					},
-					
+
 					roomdelete: function(roomid) {
 						console.log(roomid);
 						this.deleteid = roomid;
@@ -534,38 +565,66 @@
 							console.log(error);
 						});
 					},
-					
+
 					updatejump: function(roomid) {
 						this.tmptext = roomid;
 						console.log(this.tmptext);
 					},
 					roomquery: function() {
-						console.log(this.searchtype);
-						console.log(this.searchcontent);
-						let param = new URLSearchParams();
-						param.append('tabletype', "room");
-						param.append('querytype', this.searchtype);
-						param.append('querycontent', this.searchcontent);
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullquerynewapi",
-							data: param
-						}).then((res) => {
-							console.log(res.data);
-							if (res.data.length > 0) {
-								this.list = res.data;
-								this.isshow = false;
-							} else {
-								this.list = [];
-								this.isshow = true;
-							}
+						if (this.searchtype == "all") {
+							this.isshown = true;
+							let param = new URLSearchParams();
+							param.append('pageNum1', "1");
+							param.append('pageSize1', this.shownum);
 
-						}).catch((error) => {
-							console.log(error);
-						});
+							console.log(this.searchtype);
+							console.log(this.shownum);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/PageBeanapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
+
+							}).catch((error) => {
+								console.log(error);
+							});
+						} else {
+							let param = new URLSearchParams();
+							param.append('tabletype', "room");
+							param.append('querytype', this.searchtype);
+							param.append('querycontent', this.searchcontent);
+							axios({
+								headers: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								method: "post",
+								url: "http://localhost:8888/simpleweb/Fullquerynewapi",
+								data: param
+							}).then((res) => {
+								console.log(res.data);
+								if (res.data.length > 0) {
+									this.list = res.data;
+									this.isshow = false;
+								} else {
+									this.list = [];
+									this.isshow = true;
+								}
+
+							}).catch((error) => {
+								console.log(error);
+							});
+						}
 					},
 				}
 			});

@@ -97,16 +97,16 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;停车场管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<div class="col-md-1 text-nowrap">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<!-- <div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
 										type="button" style="color: #f9f9f9;background-color: #8b8b8b;"
-										onClick="location.href='5-1.html'">停车场设置</button>
+										onClick="location.href='5-1.html'"></button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
@@ -116,7 +116,7 @@
 
 									<button class="btn btn-primary" style="color: white;"
 										onClick="location.href='5-3.html'">历史查询</button>
-								</div>
+								</div> -->
 
 							</div>
 
@@ -151,7 +151,7 @@
 										</div>
 									</div>
 									<div class="col-md-3 text-nowrap">
-										
+
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
@@ -170,17 +170,27 @@
 
 
 
-									<div class="col-md-2 text-nowrap">
+									<div class="col-md-2 text-nowrap"v-show="!dateshowcontroll()">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
 													aria-controls="dataTable" placeholder="查询依据"
-													v-model="searchcontent">
+													v-model="searchcontent"v-show="!dateshowcontroll()">
 											</label>
 										</div>
 									</div>
-
-									<div class="col-md-2 text-nowrap"></div>
+									
+									<div class="col-md-2 text-nowrap"v-show="dateshowcontroll()">
+										
+											<input type="date" class="form-control form-control-sm"
+												aria-controls="dataTable" style="width: 200px;" v-model="searchcontent"
+												v-show="dateshowcontroll()">
+										
+									</div>
+									
+									<div class="col-md-2 text-nowrap"v-show="!dateshowcontroll()"></div>
+									<div class="col-md-2 text-nowrap"v-show="dateshowcontroll()"></div>
+								
 
 
 									<div class="col-md-1 text-nowrap">
@@ -209,7 +219,7 @@
 												<th><strong>停车时间</strong></th>
 												<th><strong>状态</strong></th>
 												<th><strong>使用者名</strong></th>
-												
+
 											</tr>
 										</thead>
 										<tbody>
@@ -223,7 +233,7 @@
 												<td>{{dateFormat(item.duedate)}}</td>
 												<td>{{item.status}}</td>
 												<td>{{item.username}}</td>
-												
+
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
@@ -231,7 +241,8 @@
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="parkingdelete(item.parkingid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="parkingdelete(item.parkingid)"
+														style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
 
 												<div class="dropdown" v-show="listshow">
@@ -239,15 +250,15 @@
 													<div class="row">
 														<div class="col-md-3 text-nowrap">
 															<label style="font-size: 15px;"></label>更新关键字：&nbsp;<select
-																	class="form-control form-control-sm custom-select custom-select-sm"
-																	v-model="changetype">
-																	<option value="parkingid" selected="">车位号</option>
-																	<option value="parkinglot">停车场</option>
-																	<option value="ownerid">产权人号</option>
-																	<option value="duedate">停车时间</option>
-																	<option value="status">状态</option>
-																	<option value="username">使用者名</option>
-																</select>&nbsp;</label>
+																class="form-control form-control-sm custom-select custom-select-sm"
+																v-model="changetype">
+																<option value="parkingid" selected="">车位号</option>
+																<option value="parkinglot">停车场</option>
+
+																<option value="duedate">停车时间</option>
+																<option value="status">状态</option>
+																<option value="username">使用者名</option>
+															</select>&nbsp;</label>
 														</div>
 														<div class="col-md-3 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
@@ -256,9 +267,9 @@
 																	v-model="changedata">&nbsp;&nbsp;
 															</div>
 														</div>
-														
+
 														<div class="col-md-3 text-nowrap"></div>
-														
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
@@ -273,8 +284,8 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="listshow = !listshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 
 														</div>
@@ -309,13 +320,17 @@
 															</div>
 														</div>
 
-														<div class="col-md-1 text-nowrap">
+														<!-- 	<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="停车时间"
 																	v-model="insertduedate">&nbsp;&nbsp;
 															</div>
-														</div>
+														</div> -->
+
+														<input type="date" class="form-control form-control-sm"
+															aria-controls="dataTable" style="width: 200px;"
+															v-model="insertdate">
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
@@ -333,8 +348,8 @@
 															</div>
 														</div>
 
-														
-														
+
+
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
@@ -349,8 +364,8 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
-																	type="submit"
-																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
+																	type="submit" @click="isupdateshow = !isupdateshow"
+																	style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 														</div>
 
@@ -433,49 +448,56 @@
 					insertarea: "",
 					insertduedate: "",
 					insertownerid: "",
+					insertdate: "",
 					insertparkinglot: "",
 					insertstatus: "",
 					inserttenement: "",
 					deleteid: "",
-					
+
 					insertusername: "",
 				},
 				methods: {
-					
-					dateFormat:function(time) {
-					    var date=new Date(time);
-					    var year=date.getFullYear();
-					    /* 在日期格式中，月份是从0开始的，因此要加0
-					     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-					     * */
-					    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-					    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-					    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-					    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-					    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
-					    // 拼接
-					    return year+"-"+month+"-"+day;
+					dateshowcontroll: function() {
+						if (this.searchtype == "duedate") {
+							return true;
+						} else {
+							return false;
+						}
+					},
+					dateFormat: function(time) {
+						var date = new Date(time);
+						var year = date.getFullYear();
+						/* 在日期格式中，月份是从0开始的，因此要加0
+						 * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+						 * */
+						var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+						var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+						var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+						var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+						var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+						// 拼接
+						return year + "-" + month + "-" + day;
 					},
 					testlog: function() {
 						console.log(this.buildingid);
 					},
 					parkinginsert: function() {
-						
 
-						 let param = new URLSearchParams();
+
+						let param = new URLSearchParams();
 						param.append('parkingid', this.insertparkingnumber);
-						param.append('parkinglot',this.insertparkinglot);
+						param.append('parkinglot', this.insertparkinglot);
 						param.append('ownerid', this.insertownerid);
-						param.append('duedate', this.insertduedate);
+						param.append('duedate', this.insertdate);
 						param.append('status', this.insertstatus);
 						param.append('username', this.insertusername);
-						
+
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/parkinginsertapi;",
+							url: "http://localhost:8888/simpleweb/Parkinginsertapi;",
 							data: param
 						}).then((res) => {
 							console.log(res);
@@ -483,21 +505,21 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); 
+						});
 
 					},
 					parkingupdate: function() {
 						console.log(this.tmptext);
 						console.log(this.changetype);
 						console.log(this.changedata);
-						
+
 						let param = new URLSearchParams();
 						param.append('pointer', this.tmptext);
 						param.append('tabletype', "parking");
 						param.append('updatetype', this.changetype);
 						param.append('updatecontent', this.changedata);
-						
-						
+
+
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'

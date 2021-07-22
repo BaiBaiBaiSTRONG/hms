@@ -97,17 +97,17 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;产权人服务管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
-								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="col-md-4 text-nowrap"></div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
-									<button class="btn btn-primary" type="button"
-										type="button" style="color: #f9f9f9;background-color: #8b8b8b;"
+									<button class="btn btn-primary" type="button" type="button"
+										style="color: #f9f9f9;background-color: #8b8b8b;"
 										onClick="location.href='7-1.html'">费用查询</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
 										onClick="location.href='7-2.html'">投诉管理</button>
@@ -147,14 +147,14 @@
 										</div>
 									</div>
 									<div class="col-md-2 text-nowrap">
-										
+
 										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
 													<option value="ownerid" selected="">产权人号</option>
-													<option value="ownername" >产权人姓名</option>
+													<option value="ownername">产权人姓名</option>
 													<option value="expenseid">账单号</option>
 													<option value="expensetype">费用类型</option>
 													<option value="edate">产生时间</option>
@@ -167,25 +167,29 @@
 
 
 
-									<div class="col-mt-2 text-nowrap">
+									<div class="col-md-2 text-nowrap" v-show="!dateshowcontroll()">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="查询依据"
-													v-model="searchcontent" v-show="!dateshowcontroll()">
+													aria-controls="dataTable" placeholder="查询依据" v-model="searchcontent"
+													v-show="!dateshowcontroll()">
 											</label>
 										</div>
 									</div>
-									
-									<input type = "date" class="form-control form-control-sm"
-											aria-controls="dataTable" style = "width: 200px;"
-											v-model="startdate" v-show="dateshowcontroll()">
-											
-									<input type = "date" class="form-control form-control-sm"
-											aria-controls="dataTable" style = "width: 200px;"
-											v-model="enddate"v-show="dateshowcontroll()">
+									<div class="col-md-1 text-nowrap" v-show="dateshowcontroll()">
+										<input type="date" class="form-control form-control-sm"
+											aria-controls="dataTable" style="width: 200px;" v-model="startdate"
+											v-show="dateshowcontroll()">
+									</div>
+									<div class="col-md-1 text-nowrap" v-show="dateshowcontroll()"></div>
+									<div class="col-md-1 text-nowrap" v-show="dateshowcontroll()">
+										<input type="date" class="form-control form-control-sm"
+											aria-controls="dataTable" style="width: 200px;" v-model="enddate"
+											v-show="dateshowcontroll()">
+									</div>
+									<div class="col-md-2 text-nowrap" v-show="dateshowcontroll()"></div>
 
-									<div class="col-mt-1 text-nowrap"></div>
+									<div class="col-md-3 text-nowrap"v-show="!dateshowcontroll()"></div>
 
 
 									<div class="col-md-1 text-nowrap">
@@ -194,7 +198,7 @@
 
 									</div>
 
-				<!-- 					<div class="col-md-1 text-nowrap" style="align-items: center;">
+									<!-- 					<div class="col-md-1 text-nowrap" style="align-items: center;">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 											@click="isupdateshow =!isupdateshow">插入</button>
 
@@ -207,8 +211,8 @@
 									<table class="table my-0" id="dataTable">
 										<thead>
 											<tr>
-												
-											
+
+
 												<th><strong>序号</strong></th>
 												<th><strong>产权人号</strong></th>
 												<th><strong>产权人姓名</strong></th>
@@ -216,7 +220,7 @@
 												<th><strong>应缴费用</strong></th>
 												<th><strong>费用类型</strong></th>
 												<th><strong>产生时间</strong></th>
-												
+
 											</tr>
 										</thead>
 										<tbody>
@@ -230,9 +234,9 @@
 												<td>{{item.expenseneed}}</td>
 												<td>{{item.expensetype}}</td>
 												<td>{{dateFormat(item.edate)}}</td>
-												
+
 												<td>
-		<!-- 											<button class="btn btn-primary btn-block text-white btn-user"
+													<!-- 											<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
 														@click="listshow = !listshow;updatejump(item.expenseid);">更新</button>
 												</td>
@@ -290,8 +294,8 @@
 												<div class="dropdown" v-show="isupdateshow">
 													<hr>
 													<div class="row"> -->
-														
-<!-- 
+
+													<!-- 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
@@ -336,9 +340,9 @@
 																aria-controls="dataTable" style = "width: 200px;"
 																v-model="insertdate"> -->
 
-														
-														
-			<!-- 											<div class="col-md-2 text-nowrap">
+
+
+													<!-- 											<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
@@ -357,37 +361,37 @@
 															</div>
 														</div> -->
 
-													</div>
-												</div>
-											</tr>
 								</div>
 							</div>
-
-							<tr></tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th><strong>序号</strong></th>
-									<th><strong>产权人号</strong></th>
-									<th><strong>产权人姓名</strong></th>
-									<th><strong>产生费用</strong></th>
-									<th><strong>应缴费用</strong></th>
-									<th><strong>费用类型</strong></th>
-									<th><strong>产生时间</strong></th>
-								</tr>
-							</tfoot>
-							</table>
+							</tr>
 						</div>
+					</div>
 
-						<div class="row">
-							<div class="col-md-6 align-self-center">
-								<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-								</p>
-							</div>
-							<div class="col-md-6">
-								<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+					<tr></tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><strong>序号</strong></th>
+							<th><strong>产权人号</strong></th>
+							<th><strong>产权人姓名</strong></th>
+							<th><strong>产生费用</strong></th>
+							<th><strong>应缴费用</strong></th>
+							<th><strong>费用类型</strong></th>
+							<th><strong>产生时间</strong></th>
+						</tr>
+					</tfoot>
+					</table>
+				</div>
 
-									<!-- <ul class="pagination">
+				<div class="row">
+					<div class="col-md-6 align-self-center">
+						<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+						</p>
+					</div>
+					<div class="col-md-6">
+						<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+
+							<!-- <ul class="pagination">
 												<li class="page-item disabled"><a class="page-link" href="#"
 														aria-label="Previous"><span aria-hidden="true">«</span></a></li>
 												<li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -396,13 +400,13 @@
 												<li class="page-item"><a class="page-link" href="#"
 														aria-label="Next"><span aria-hidden="true">»</span></a></li>
 											</ul> -->
-									<!-- 此部分为处理分页跳转 暂不实现-->
-								</nav>
-							</div>
-						</div>
+							<!-- 此部分为处理分页跳转 暂不实现-->
+						</nav>
 					</div>
 				</div>
 			</div>
+		</div>
+		</div>
 		</div>
 		<footer class="bg-white sticky-footer">
 			<div class="container my-auto">
@@ -438,34 +442,35 @@
 					insertownerid: "",
 					insertownername: "",
 					insertstatus: "",
-					startdate:"",
-					enddate:"",
+					startdate: "",
+					enddate: "",
 					insertexpenseall: "",
 					deleteid: "",
 					insertexpensetype: "",
-					insertdate:"",
+					insertdate: "",
 				},
 				methods: {
-					
-					dateFormat:function(time) {
-					    var date=new Date(time);
-					    var year=date.getFullYear();
-					    /* 在日期格式中，月份是从0开始的，因此要加0
-					     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-					     * */
-					    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-					    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-					    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-					    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-					    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
-					    // 拼接
-					    return year+"-"+month+"-"+day;
+
+
+					dateFormat: function(time) {
+						var date = new Date(time);
+						var year = date.getFullYear();
+						/* 在日期格式中，月份是从0开始的，因此要加0
+						 * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+						 * */
+						var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+						var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+						var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+						var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+						var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+						// 拼接
+						return year + "-" + month + "-" + day;
 					},
 
-					dateshowcontroll:function(){
-						if(this.searchtype =="edate"){
+					dateshowcontroll: function() {
+						if (this.searchtype == "edate") {
 							return true;
-						}else{
+						} else {
 							return false;
 						}
 					},
@@ -478,7 +483,7 @@
 					// 	param.append('expenseall', this.insertexpenseall);
 					// 	param.append('expenseneed', this.insertexpenseneed);
 					// 	param.append('edate', this.insertedate);
-						
+
 					// 	axios({
 					// 		headers: {
 					// 			'content-type': 'application/x-www-form-urlencoded'
@@ -551,7 +556,7 @@
 					// 	console.log(this.tmptext);
 					// },
 					expensequery: function() {
-						if(this.searchtype != "edate"){
+						if (this.searchtype != "edate") {
 							let param = new URLSearchParams();
 							param.append('tabletype', "expense inner join owner using (ownerid)");
 							param.append('querytype', this.searchtype);
@@ -578,7 +583,7 @@
 							}).catch((error) => {
 								console.log(error);
 							});
-						}else{
+						} else {
 							let param = new URLSearchParams();
 							param.append('date1', this.startdate);
 							param.append('date2', this.enddate);
@@ -598,7 +603,7 @@
 									this.list = [];
 									this.isshow = true;
 								}
-							
+
 							}).catch((error) => {
 								console.log(error);
 							});

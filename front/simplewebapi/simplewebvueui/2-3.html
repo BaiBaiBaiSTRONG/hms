@@ -97,7 +97,7 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;收费管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
@@ -157,11 +157,11 @@
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
-													<option value="roomname" selected="">房间名</option>
+													<option value="expenseid" selected="">账单号</option>
 													<option value="ownerid">产权人号</option>
-													<option value="buildingid">楼宇号</option>
-													<option value="tenement">住户</option>
-													<option value="status">状态</option>
+													<option value="expensetype">费用类型</option>
+													<option value="edate">产生时间</option>
+													
 												</select>&nbsp;</label>
 
 										</div>
@@ -184,15 +184,15 @@
 
 									<div class="col-md-1 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="roomquery()">查询</button>
+											@click="expensequery()">查询</button>
 
 									</div>
 
-									<div class="col-md-1 text-nowrap" style="align-items: center;">
+			<!-- 						<div class="col-md-1 text-nowrap" style="align-items: center;">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
 											@click="isupdateshow =!isupdateshow">插入</button>
 
-									</div>
+									</div> -->
 
 								</div>
 								<div class="table-responsive table mt-2" id="dataTable" role="grid"
@@ -202,13 +202,13 @@
 										<thead>
 											<tr>
 												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
-												<th><strong>状态</strong></th>
+												<th><strong>账单号</strong></th>
+												
+												<th><strong>应缴费用</strong></th>
+												<th><strong>总费用</strong></th>
+												<th><strong>费用类型</strong></th>
+												<th><strong>产生时间</strong></th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -216,54 +216,55 @@
 
 											<tr v-for="(item, index) in list">
 												<td>{{index + 1 }}</td>
-												<td>{{item.roomid}}</td>
-												<td>{{item.roomname}}</td>
-												<td>{{item.buildingid}}</td>
-												<td>{{item.ownerid}}</td>
-												<td>{{item.area}}</td>
-												<td>{{item.tenement}}</td>
-												<td>{{item.status}}</td>
-												<td>
+												<td>{{item.expenseid}}</td>
+												
+												<td>{{item.sumneed}}</td>
+												<td>{{item.sumall}}</td>
+												
+												<td>{{item.expensetype}}</td>
+												<td>{{dateFormat(item.edate)}}</td>
+
+											<!-- 	<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
-														@click="listshow = !listshow;updatejump(item.roomid);">更新</button>
+														@click="listshow = !listshow;updatejump(item.expenseid);">更新</button>
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
-												</td>
+														type="submit" @click="expensedelete(item.expenseid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+												</td> -->
 
-												<div class="dropdown" v-show="listshow">
-													<hr>
-													<div class="row">
+												<!-- <div class="dropdown" v-show="listshow">
+													<hr> -->
+													<!-- <div class="row">
 														<div class="col-md-3 text-nowrap">
 															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
-																	<option value="roomname" selected="A">房间名</option>
-																	<option value="buildingid">楼宇号</option>
+																	<option value="expenseall" selected="A">产生费用</option>
+																	<option value="expenseneed">应缴费用</option>
 																	<option value="ownerid">产权人号</option>
-																	<option value="tenement">住户</option>
-																	<option value="status">状态</option>
-																	<option value="area">面积</option>
+																	<option value="expencetype">费用类型</option>
+																	<option value="edate">产生时间</option>
+																	
 																</select>&nbsp;</label>
-														</div>
-														<div class="col-md-3 text-nowrap">
+														</div> -->
+														<!-- <div class="col-md-3 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="更改的数据"
-																	v-model="changedata">&nbsp;&nbsp;
-															</div>
-														</div>
+																	v-model="changedata">&nbsp;&nbsp; -->
+					<!-- 										</div>
+														</div> -->
 														
-														<div class="col-md-3 text-nowrap"></div>
+													<!-- 	<div class="col-md-3 text-nowrap"></div>
 														
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="listshow = !listshow&roomupdate()">提交更新</button>
+																	@click="listshow = !listshow&expenseupdate()">提交更新</button>
 
 															</div>
 														</div>
@@ -276,35 +277,44 @@
 																	@click="listshow = !listshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
 
-														</div>
-													</div>
-												</div>
+														</div> --> 
+												<!-- 	</div>
+												</div> -->
 
-												<div class="dropdown" v-show="isupdateshow">
+			<!-- 									<div class="dropdown" v-show="isupdateshow">
 													<hr>
 													<div class="row">
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间号"
-																	v-model="insertroomnumber">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="账单号"
+																	v-model="insertexpenseid">&nbsp;&nbsp;
 															</div>
 														</div>
+														
+
+														<div class="col-md-1 text-nowrap">
+															<label style="font-size: 15px;"><select
+																	class="form-control form-control-sm custom-select custom-select-sm"
+																
+																     v-model="changexpense">
+																
+																	<option value="0" >新增</option>
+																	<option value="1">缴费</option>
+																	
+																	
+																</select>&nbsp;</label>
+															
+														</div>
+														
+														
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="房间名"
-																	v-model="insertroomname">&nbsp;&nbsp;
-															</div>
-														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="楼宇号"
-																	v-model="insertbuildingid">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="费用"
+																	v-model="insertexpense">&nbsp;&nbsp;
 															</div>
 														</div>
 
@@ -319,36 +329,36 @@
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="面积"
-																	v-model="insertarea">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="费用类型"
+																	v-model="insertexpensetype">&nbsp;&nbsp;
 															</div>
-														</div>
-
+														</div> -->
+<!-- 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="住户"
-																	v-model="inserttenement">&nbsp;&nbsp;
+																	aria-controls="dataTable" placeholder="产生时间"
+																	v-model="insertedate">&nbsp;&nbsp;
 															</div>
 														</div>
-
-														<div class="col-md-1 text-nowrap">
-															<div class="dataTables_length" aria-controls="dataTable">
-																<input type="text" class="form-control form-control-sm"
-																	aria-controls="dataTable" placeholder="状态"
-																	v-model="insertstatus">&nbsp;&nbsp;
-															</div>
-														</div>
+														
+															<input type = "date" class="form-control form-control-sm"
+																	aria-controls="dataTable" style = "width: 200px;"
+																	v-model="insertdate">
+														
+														
+														
 														
 														<div class="col-md-2 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
-
+																	@click="listshow = !listshow&expenseinsert()">提交插入</button>
+														
 															</div>
 														</div>
+						                                
 
 														<div class="col-md-1 text-nowrap">
 															<div class="dataTables_length" aria-controls="dataTable">
@@ -357,7 +367,7 @@
 																	type="submit"
 																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
-														</div>
+														</div> -->
 
 													</div>
 												</div>
@@ -370,13 +380,12 @@
 							<tfoot>
 								<tr>
 									<th><strong>序号</strong></th>
-									<th><strong>房间号</strong></th>
-									<th><strong>房间名</strong></th>
-									<th><strong>楼宇号</strong></th>
-									<th><strong>产权人号</strong></th>
-									<th><strong>面积</strong></th>
-									<th><strong>住户</strong></th>
-									<th><strong>状态</strong></th>
+									<th><strong>账单号</strong></th>
+									
+									<th><strong>应缴费用</strong></th>
+									<th><strong>总费用</strong></th>
+									<th><strong>费用类型</strong></th>
+									<th><strong>产生时间</strong></th>
 								</tr>
 							</tfoot>
 							</table>
@@ -398,7 +407,7 @@
 												<li class="page-item"><a class="page-link" href="#">3</a></li>
 												<li class="page-item"><a class="page-link" href="#"
 														aria-label="Next"><span aria-hidden="true">»</span></a></li>
-											</ul> -->
+											</ul>
 									<!-- 此部分为处理分页跳转 暂不实现-->
 								</nav>
 							</div>
@@ -434,41 +443,69 @@
 					tmptext: "",
 					changetype: "",
 					changedata: "",
+					sumneed:"",
+					sumall:"",
 					isupdateshow: false,
-					insertroomnumber: "",
-					insertarea: "",
-					insertbuildingid: "",
+					insertexpenseid: "",
+					insertexpenseall: "",
+					insertexpensetype: "",
+					insertedate: "",
+					insertexpenseneed: "",
 					insertownerid: "",
-					insertroomname: "",
+					insertdate: "",
+					changexpense: "",
+					insertexpensename: "",
 					insertstatus: "",
 					inserttenement: "",
+					insertexpense: "",
 					deleteid: ""
 				},
 				methods: {
+					
+					dateFormat:function(time) {
+					    var date=new Date(time);
+					    var year=date.getFullYear();
+					    /* 在日期格式中，月份是从0开始的，因此要加0
+					     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+					     * */
+					    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+					    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
+					    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
+					    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
+					    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+					    // 拼接
+					    return year+"-"+month+"-"+day;
+					},
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					roominsert: function() {
-						console.log(this.insertroomid);
-						console.log(this.insertroomname);
-						console.log(this.insertbuildingid);
-						console.log(this.insertownerid);
-						console.log(this.insertarea);
-						console.log(this.inserttenement);
-						console.log(this.insertstatus);
+					expenseinsert: function() {
+					
+					
 
-						/* let param = new URLSearchParams();
-						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
-						param.append('updatetype', this.changetype);
-						param.append('updatecontent', this.changedata);
+						let param = new URLSearchParams();
+						param.append('expenseid', this.insertexpenseid);
+						if (this.changexpense=="0") {
+							param.append('expenseall', this.insertexpense);
+							param.append('expenseneed', this.insertexpense);
+							
+						} else{
+							param.append('expenseall', "0");
+							this.insertexpense = "-"+ this.insertexpense;
+							param.append('expenseneed', this.insertexpense );
+							
+						}
+						param.append('ownerid', this.insertownerid);
+						param.append('expensetype', this.insertexpensetype);
+						param.append('edate', this.insertdate);
+						
 						
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullupdateapi",
+							url: "http://localhost:8888/simpleweb/Expenseinsertapi",
 							data: param
 						}).then((res) => {
 							console.log(res);
@@ -476,15 +513,15 @@
 							location.reload();
 						}).catch((error) => {
 							console.log(error);
-						}); */
+						}); 
 
 					},
-					roomupdate: function() {
+					expenseupdate: function() {
 						console.log(this.changetype);
 						console.log(this.changedata);
 						let param = new URLSearchParams();
 						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
+						param.append('tabletype', "expense");
 						param.append('updatetype', this.changetype);
 						param.append('updatecontent', this.changedata);
 						axios({
@@ -504,11 +541,11 @@
 
 
 					},
-					roomdelete: function(roomid) {
-						console.log(roomid);
-						this.deleteid = roomid;
+					expensedelete: function(expenseid) {
+						console.log(expenseid);
+						this.deleteid = expenseid;
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "expense");
 						param.append('identifier', this.deleteid);
 						axios({
 							headers: {
@@ -530,15 +567,15 @@
 							console.log(error);
 						});
 					},
-					updatejump: function(roomid) {
-						this.tmptext = roomid;
+					updatejump: function(expenseid) {
+						this.tmptext = expenseid;
 						console.log(this.tmptext);
 					},
-					roomquery: function() {
+					expensequery: function() {
 						console.log(this.searchtype);
 						console.log(this.searchcontent);
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "expense");
 						param.append('querytype', this.searchtype);
 						param.append('querycontent', this.searchcontent);
 						axios({
@@ -565,6 +602,8 @@
 				}
 			});
 		</script>
+		<script src="assets/js/jquery.min.js"></script>
+				<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 
 </html>

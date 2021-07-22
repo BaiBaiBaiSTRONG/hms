@@ -96,14 +96,24 @@
 					<!-- 结束上边栏 开始处理下端表格部分 -->
 
 					<div class="container-fluid">
-						<div class="card shadow">
-							<br>
-							<br>
+						<div class="card shadow"id="app">
+							<hr>
 							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
 							<div class="row">
-								<div class="col-md-5 text-nowrap"></div>
+								<div class="col-md-1 text-nowrap"></div>
+								<div class="col-md-3 text-nowrap">
+									<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+										<label>Show&nbsp;<select
+												class="form-control form-control-sm custom-select custom-select-sm"
+												v-model="shownum">
+												<option value="5" selected="">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+											</select>&nbsp;</label>
+									</div>
+								</div>
+								<div class="col-md-1 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
 										type="button" style="color: white;"
@@ -121,7 +131,7 @@
 
 							</div>
 
-							<div class="card-body" id="app">
+							<div class="card-body" >
 								<div class="row">
 									<!--
 										<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
@@ -244,8 +254,8 @@
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
 																	<option value="roomname" selected="A">房间名</option>
-																	<option value="buildingid">楼宇号</option>
-																	<option value="ownerid">产权人号</option>
+																	<!-- <option value="buildingid">楼宇号</option> -->
+																
 																	<option value="tenement">住户</option>
 																	<option value="status">状态</option>
 																</select>&nbsp;</label>
@@ -453,29 +463,32 @@
 					},
 					roominsert: function() {
 						
-						let param = new URLSearchParams();
-						
-						param.append('roomid', this.insertroomid);
-						param.append('roomname',this.insertroomname);
-						param.append('buildingid', this.insertbuildingid);
-						param.append('ownerid', this.insertownerid);
-						param.append('area', this.insertarea);
-						param.append('status', this.insertstatus);
-						
-						axios({
-							headers: {
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							method: "post",
-							url: "http://localhost:8888/simpleweb/Roominsertapi",
-							data: param
-						}).then((res) => {
-							console.log(res);
-							alert("插入成功");
-							location.reload();
-						}).catch((error) => {
-							console.log(error);
-						}); 
+
+					
+					let param = new URLSearchParams();
+					param.append('roomid', this.insertroomnumber);
+					param.append('roomname', this.insertroomname);
+					param.append('buildingid', this.insertbuildingid);
+					param.append('ownerid', this.insertownerid);
+					param.append('area', this.insertarea);
+					param.append('tenement', this.inserttenement);
+					param.append('status', this.insertstatus);
+					
+					axios({
+						headers: {
+							'content-type': 'application/x-www-form-urlencoded'
+						},
+						method: "post",
+						url: "http://localhost:8888/simpleweb/Roominsertapi",
+						data: param
+					}).then((res) => {
+						console.log(res);
+						alert("插入成功");
+						location.reload();
+					}).catch((error) => {
+						console.log(error);
+					}); 
+									
 
 					},
 					roomupdate: function() {
@@ -537,7 +550,7 @@
 						console.log(this.searchtype);
 						console.log(this.searchcontent);
 						let param = new URLSearchParams();
-						param.append('tabletype', "room inner join building using (buildingid)");
+						param.append('tabletype', "room inner join building using (buildingid) inner join owner using (ownerid)");
 						param.append('querytype', this.searchtype);
 						param.append('querycontent', this.searchcontent);
 						axios({

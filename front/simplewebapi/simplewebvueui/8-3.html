@@ -97,8 +97,8 @@
 
 					<div class="container-fluid">
 						<div class="card shadow">
-							<br>
-							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;房产信息管理</h3>
+							<hr>
+							<h3 style="color: #224abe;margin: auto;">&nbsp;&nbsp;保洁管理</h3>
 							<div class="row">
 								<div class="col-md-5 text-nowrap"></div>
 								<div class="col-md-3 text-nowrap"></div>
@@ -106,16 +106,16 @@
 								<div class="col-md-1 text-nowrap">
 									<button class="btn btn-primary" type="button"
 										type="button" style="color: white;"
-										onClick="location.href='1-1.html'">房产信息</button>
+										onClick="location.href='8-1.html'">基础信息</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="button" style="color: white;"
-										onClick="location.href='1-2.html'">楼宇管理</button>
+										onClick="location.href='8-2.html'">日常管理</button>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 									<button class="btn btn-primary" style="color: #f9f9f9;background-color: #8b8b8b;"
-										onClick="location.href='1-3.html'">业务管理</button>
+										onClick="location.href='8-3.html'">工作检查统计表</button>
 								</div>
 
 							</div>
@@ -150,47 +150,44 @@
 												</select>&nbsp;</label>
 										</div>
 									</div>
-									<div class="col-md-3 text-nowrap">
+									<div class="col-md-1 text-nowrap">
 										
-										<div id="housingname" class="dataTables_length" aria-controls="dataTable">
+										<!-- <div id="housingname" class="dataTables_length" aria-controls="dataTable">
 
 											<label style="font-size: 15px;">查询关键字：&nbsp;<select
 													class="form-control form-control-sm custom-select custom-select-sm"
 													v-model="searchtype">
-													<option value="roomname" selected="">房间名</option>
+													<option value="cleaningname" selected="">房间名</option>
 													<option value="ownerid">产权人号</option>
 													<option value="buildingid">楼宇号</option>
 													<option value="tenement">住户</option>
 													<option value="status">状态</option>
 												</select>&nbsp;</label>
 
-										</div>
+										</div> -->
 									</div>
-
-
+									<input type = "date" class="form-control form-control-sm"
+												aria-controls="dataTable" style = "width: 200px;"
+												v-model="searchcontent2">
 
 									<div class="col-md-2 text-nowrap">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
-													aria-controls="dataTable" placeholder="查询依据"
-													v-model="searchcontent">
+													aria-controls="dataTable" placeholder="员工工号"
+													v-model="searchcontent1">
 											</label>
 										</div>
 									</div>
+									
+
 
 									<div class="col-md-2 text-nowrap"></div>
 
 
 									<div class="col-md-1 text-nowrap">
 										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="roomquery()">查询</button>
-
-									</div>
-
-									<div class="col-md-1 text-nowrap" style="align-items: center;">
-										<button class="btn btn-primary btn-block text-white btn-user" type="submit"
-											@click="isupdateshow =!isupdateshow">插入</button>
+											@click="cleaningquery()">查询</button>
 
 									</div>
 
@@ -202,12 +199,9 @@
 										<thead>
 											<tr>
 												<th><strong>序号</strong></th>
-												<th><strong>房间号</strong></th>
-												<th><strong>房间名</strong></th>
-												<th><strong>楼宇号</strong></th>
-												<th><strong>产权人号</strong></th>
-												<th><strong>面积</strong></th>
-												<th><strong>住户</strong></th>
+												<th><strong>员工工号</strong></th>
+												<th><strong>日期</strong></th>
+												<th><strong>清洁工作内容</strong></th>
 												<th><strong>状态</strong></th>
 											</tr>
 										</thead>
@@ -216,31 +210,28 @@
 
 											<tr v-for="(item, index) in list">
 												<td>{{index + 1 }}</td>
-												<td>{{item.roomid}}</td>
-												<td>{{item.roomname}}</td>
-												<td>{{item.buildingid}}</td>
-												<td>{{item.ownerid}}</td>
-												<td>{{item.area}}</td>
-												<td>{{item.tenement}}</td>
-												<td>{{item.status}}</td>
-												<td>
+												<td>{{item.staffid}}</td>
+												<td>{{dateFormat(item.cleaningtime)}}</td>
+												<td>{{item.cleaningname}}</td>
+												<td>{{item.cleaningstatus}}</td>
+<!-- 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
 														type="submit"
-														@click="listshow = !listshow;updatejump(item.roomid);">更新</button>
+														@click="listshow = !listshow;updatejump(item.cleaningid);">更新</button>
 												</td>
 												<td>
 													<button class="btn btn-primary btn-block text-white btn-user"
-														type="submit" @click="roomdelete(item.roomid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
+														type="submit" @click="cleaningdelete(item.cleaningid)"style="color: #f9f9f9;background-color: #aa1a1a;">删除</button>
 												</td>
-
-												<div class="dropdown" v-show="listshow">
+ -->
+												 <div class="dropdown" v-show="listshow">
 													<hr>
 													<div class="row">
 														<div class="col-md-3 text-nowrap">
-															<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
+														<label style="font-size: 15px;">更改选项:&nbsp;&nbsp;<select
 																	class="form-control form-control-sm custom-select custom-select-sm"
 																	v-model="changetype">
-																	<option value="roomname" selected="A">房间名</option>
+																	<option value="cleaningname">房间名</option>
 																	<option value="buildingid">楼宇号</option>
 																	<option value="ownerid">产权人号</option>
 																	<option value="tenement">住户</option>
@@ -252,9 +243,9 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="更改的数据"
-																	v-model="changedata">&nbsp;&nbsp;
+																	v-model="changedata">&nbsp;&nbsp; -->
 															</div>
-														</div>
+														</div> 
 														
 														<div class="col-md-3 text-nowrap"></div>
 														
@@ -263,7 +254,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="listshow = !listshow&roomupdate()">提交更新</button>
+																	@click="listshow = !listshow&cleaningupdate()">提交更新</button>
 
 															</div>
 														</div>
@@ -288,7 +279,7 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="房间号"
-																	v-model="insertroomnumber">&nbsp;&nbsp;
+																	v-model="insertcleaningnumber">&nbsp;&nbsp;
 															</div>
 														</div>
 
@@ -296,7 +287,7 @@
 															<div class="dataTables_length" aria-controls="dataTable">
 																<input type="text" class="form-control form-control-sm"
 																	aria-controls="dataTable" placeholder="房间名"
-																	v-model="insertroomname">&nbsp;&nbsp;
+																	v-model="insertcleaningname">&nbsp;&nbsp;
 															</div>
 														</div>
 
@@ -345,7 +336,7 @@
 																<button
 																	class="btn btn-primary btn-block text-white btn-user"
 																	type="submit"
-																	@click="isupdateshow = !isupdateshow&roominsert()">提交插入</button>
+																	@click="isupdateshow = !isupdateshow&cleaninginsert()">提交插入</button>
 
 															</div>
 														</div>
@@ -357,7 +348,7 @@
 																	type="submit"
 																	@click="isupdateshow = !isupdateshow"style="color: #f9f9f9;background-color: #aa1a1a;">取消</button>
 															</div>
-														</div>
+														</div> --> -->
 
 													</div>
 												</div>
@@ -369,14 +360,11 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th><strong>序号</strong></th>
-									<th><strong>房间号</strong></th>
-									<th><strong>房间名</strong></th>
-									<th><strong>楼宇号</strong></th>
-									<th><strong>产权人号</strong></th>
-									<th><strong>面积</strong></th>
-									<th><strong>住户</strong></th>
-									<th><strong>状态</strong></th>
+												<th><strong>序号</strong></th>
+												<th><strong>员工工号</strong></th>
+												<th><strong>日期</strong></th>
+												<th><strong>清洁工作内容</strong></th>
+												<th><strong>状态</strong></th>
 								</tr>
 							</tfoot>
 							</table>
@@ -398,7 +386,7 @@
 												<li class="page-item"><a class="page-link" href="#">3</a></li>
 												<li class="page-item"><a class="page-link" href="#"
 														aria-label="Next"><span aria-hidden="true">»</span></a></li>
-											</ul> -->
+											</ul>
 									<!-- 此部分为处理分页跳转 暂不实现-->
 								</nav>
 							</div>
@@ -428,18 +416,20 @@
 					iscorrect: false,
 					listshow: false,
 					buildingid: "",
-					searchtype: "",
-					searchcontent: "",
+					searchtype1: "",
+					searchtype2: "",
+					searchcontent1: "",
+					searchcontent2:"",
 					list: [],
 					tmptext: "",
 					changetype: "",
 					changedata: "",
 					isupdateshow: false,
-					insertroomnumber: "",
+					insertcleaningnumber: "",
 					insertarea: "",
 					insertbuildingid: "",
 					insertownerid: "",
-					insertroomname: "",
+					insertcleaningname: "",
 					insertstatus: "",
 					inserttenement: "",
 					deleteid: ""
@@ -448,9 +438,23 @@
 					testlog: function() {
 						console.log(this.buildingid);
 					},
-					roominsert: function() {
-						console.log(this.insertroomid);
-						console.log(this.insertroomname);
+					dateFormat: function(time) {
+						var date = new Date(time);
+						var year = date.getFullYear();
+						/* 在日期格式中，月份是从0开始的，因此要加0
+						 * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+						 * */
+						var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+						var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+						var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+						var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+						var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+						// 拼接
+						return year + "-" + month + "-" + day;
+					},
+					cleaninginsert: function() {
+						console.log(this.insertcleaningid);
+						console.log(this.insertcleaningname);
 						console.log(this.insertbuildingid);
 						console.log(this.insertownerid);
 						console.log(this.insertarea);
@@ -459,7 +463,7 @@
 
 						/* let param = new URLSearchParams();
 						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
+						param.append('tabletype', "cleaning");
 						param.append('updatetype', this.changetype);
 						param.append('updatecontent', this.changedata);
 						
@@ -479,12 +483,12 @@
 						}); */
 
 					},
-					roomupdate: function() {
+					cleaningupdate: function() {
 						console.log(this.changetype);
 						console.log(this.changedata);
 						let param = new URLSearchParams();
 						param.append('pointer', this.tmptext);
-						param.append('tabletype', "room");
+						param.append('tabletype', "cleaning");
 						param.append('updatetype', this.changetype);
 						param.append('updatecontent', this.changedata);
 						axios({
@@ -504,11 +508,11 @@
 
 
 					},
-					roomdelete: function(roomid) {
-						console.log(roomid);
-						this.deleteid = roomid;
+					cleaningdelete: function(cleaningid) {
+						console.log(cleaningid);
+						this.deleteid = cleaningid;
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
+						param.append('tabletype', "cleaning");
 						param.append('identifier', this.deleteid);
 						axios({
 							headers: {
@@ -530,23 +534,23 @@
 							console.log(error);
 						});
 					},
-					updatejump: function(roomid) {
-						this.tmptext = roomid;
+					updatejump: function(cleaningid) {
+						this.tmptext = cleaningid;
 						console.log(this.tmptext);
 					},
-					roomquery: function() {
-						console.log(this.searchtype);
-						console.log(this.searchcontent);
+					cleaningquery: function() {
 						let param = new URLSearchParams();
-						param.append('tabletype', "room");
-						param.append('querytype', this.searchtype);
-						param.append('querycontent', this.searchcontent);
+						param.append('tabletype', "cleaning");
+						param.append('querytype1', "staffid");
+						param.append('querytype2', "cleaningtime");
+						param.append('querycontent1', this.searchcontent1);
+						param.append('querycontent2', this.searchcontent2);
 						axios({
 							headers: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							method: "post",
-							url: "http://localhost:8888/simpleweb/Fullquerynewapi",
+							url: "http://localhost:8888/simpleweb/Fullquery2api",
 							data: param
 						}).then((res) => {
 							console.log(res.data);
