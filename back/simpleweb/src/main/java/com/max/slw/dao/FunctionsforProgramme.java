@@ -245,7 +245,7 @@ public class FunctionsforProgramme {
 
   ) throws ParseException {
     try {
-      int var = Db.use().execute("insert into cleaning values(?,?,?,?,?,?)", Integer.parseInt(requestid), requestcontent, requesttype, requestsatatus, staffid, Integer.parseInt(ownerid));
+      int var = Db.use().execute("insert into request values(?,?,?,?,?,?)", Integer.parseInt(requestid), requestcontent,requesttype, requestsatatus, staffid, Integer.parseInt(ownerid));
       return var;
     } catch (SQLException throwables) {
       throwables.printStackTrace();
@@ -266,17 +266,35 @@ public class FunctionsforProgramme {
   public List<Entity> findAll(int startIndex, int pageSize) {
     List<Entity> listall = new ArrayList<>();
     List<Entity> listneed = new ArrayList<>();
-    FunctionsforProgramme way = new FunctionsforProgramme();
+    FunctionsforProgramme way=new FunctionsforProgramme();
     listall = way.findAllUser();
-    int leftbehind = listall.size() % pageSize;
-    if (leftbehind == 0) {
+    int leftbehind = listall.size()%pageSize;
+    if (leftbehind==0&&(listall.size()-startIndex)>pageSize) {
       for (int a = 0; a < pageSize; a++) {
+
+
         listneed.add(listall.get(startIndex + a));
+
       }
-    } else {
-      for (int a = 0; a < leftbehind; a++)
-        listneed.add(listall.get(startIndex + a));
     }
+    else if((listall.size()-startIndex)<pageSize && leftbehind!=0) {
+      for (int a = 0; a < leftbehind; a++) {
+
+
+        listneed.add(listall.get(startIndex + a));
+
+      }
+    }
+    else {
+      for (int a = 0; a < pageSize; a++) {
+
+
+        listneed.add(listall.get(startIndex + a));
+
+      }
+    }
+
+
     return listneed;
   }
 }

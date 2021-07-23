@@ -169,7 +169,7 @@
 
 
 
-									<div class="col-md-2 text-nowrap">
+									<div class="col-md-2 text-nowrap" v-show="!dateshowcontroll()">
 										<div class="text-md-right dataTables_filter" id="dataTable_filter">
 											<label>
 												<input type="text" class="form-control form-control-sm"
@@ -177,6 +177,12 @@
 													v-model="searchcontent">
 											</label>
 										</div>
+									</div>
+									
+									<div class="col-md-2 text-nowrap" v-show="dateshowcontroll()">
+										<input type="date" class="form-control form-control-sm"
+											aria-controls="dataTable" style="width: 200px;" v-model="searchcontent"
+											v-show="dateshowcontroll()">&nbsp;
 									</div>
 
 									<div class="col-md-2 text-nowrap"></div>
@@ -218,8 +224,8 @@
 												<td>{{index + 1 }}</td>
 												<td>{{item.expenseid}}</td>
 												
-												<td>{{item.sumneed}}</td>
-												<td>{{item.sumall}}</td>
+												<td>{{item.expenseneed}}</td>
+												<td>{{item.expenseall}}</td>
 												
 												<td>{{item.expensetype}}</td>
 												<td>{{dateFormat(item.edate)}}</td>
@@ -461,6 +467,13 @@
 					deleteid: ""
 				},
 				methods: {
+					dateshowcontroll: function() {
+						if (this.searchtype == "edate") {
+							return true;
+						} else {
+							return false;
+						}
+					},
 					
 					dateFormat:function(time) {
 					    var date=new Date(time);
